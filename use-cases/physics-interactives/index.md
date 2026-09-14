@@ -30,7 +30,17 @@ The Deep Research prompt that produced the background artifacts in `outputs/`, p
 
 ## outputs/
 
-Produced artifacts — background essays, research reports, and any sims faculty generate.
+Produced artifacts — the worked simulations, plus background essays and research reports.
+
+**The simulations** — three worked examples, each a single self-contained HTML file. Double-click to open in Chrome; no server, no build step, no network.
+
+- [outputs/sims/enzyme-kinetics.html](outputs/sims/enzyme-kinetics.html) — Michaelis–Menten saturation and inhibition. Three linked views: enzyme occupancy, the v-vs-[S] curve, and the Lineweaver–Burk plot.
+- [outputs/sims/hardy-weinberg.html](outputs/sims/hardy-weinberg.html) — why a dominant allele does not spread. Selection and drift are the two assumptions a student can break.
+- [outputs/sims/predator-prey.html](outputs/sims/predator-prey.html) — Lotka–Volterra cycles, time series linked to a phase portrait, with the peak lag measured live.
+
+See [outputs/sims/README.md](outputs/sims/README.md) for what each teaches and how they were checked.
+
+**Background material**
 
 - [outputs/essay-phet-tradition.md](outputs/essay-phet-tradition.md) / [outputs/essay-phet-tradition.html](outputs/essay-phet-tradition.html) — historical context for the design tradition
 - [outputs/essay-manipulable-artifact.md](outputs/essay-manipulable-artifact.md) — companion essay placing PhET in the learning-sciences tradition

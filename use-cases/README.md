@@ -25,6 +25,8 @@ dropped — the ordering there was a gallery sequence, not a teaching order.
 | `handout-formatting` | messy Word/PDF → clean print-ready handouts + answer key | real diff-eq worksheets; a genuinely messy `.docx` | STEM |
 | `physics-interactives` | teaching brief → manipulable simulation + lesson plan | a faculty teaching brief | bio/STEM |
 
+**`physics-interactives` now ships three working simulations** in `outputs/sims/`: enzyme kinetics (Michaelis–Menten + inhibition), Hardy–Weinberg, and Lotka–Volterra predator–prey. Each is one self-contained HTML file that opens by double-click, with sliders, linked views, guided prompts, and a visible model-limitations panel. Before this the project shipped skills and templates but no actual sim. See [`physics-interactives/outputs/sims/README.md`](physics-interactives/outputs/sims/README.md) for how the models were checked — including a textbook claim the build caught and corrected.
+
 Each covers a different operation type — summarize, batch-process, search at scale,
 author a skill, reformat, build an artifact — so no two repeat the same move.
 

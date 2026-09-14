@@ -195,7 +195,7 @@ In PowerShell, create a folder for your projects:
 cd $env:USERPROFILE
 mkdir Development
 cd Development
-git clone https://github.com/bok-learning-lab/claude-workshop-exercise.git
+git clone https://github.com/ll-26-27/claude-workshop-exercise.git
 ```
 
 Adjust the first line if your projects live somewhere else. The repo is public, so cloning needs no login. It clones into a subfolder named `claude-workshop-exercise`.
