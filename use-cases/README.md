@@ -1,6 +1,6 @@
 # Use cases
 
-Portable use-case templates. Every one follows the same schema as this repo's root:
+Portable worked examples. Every one follows the same schema as this repo's root:
 
 ```
 <use-case>/
@@ -11,28 +11,46 @@ Portable use-case templates. Every one follows the same schema as this repo's ro
   CLAUDE.md      project instructions
 ```
 
-## Candidate pool
+Ported from `~/Development/20260903-aiLAB/demos/`, with the `NN-` number prefixes
+dropped — the ordering there was a gallery sequence, not a teaching order.
 
-Source: `~/Development/20260903-aiLAB/demos/` — 23 demos, all already conforming to
-the schema above. Shortlist below; **final five not yet picked.**
+## The six
 
-### Strongest candidates for a one-day workshop
+| Use case | The move | Inputs are | Fit |
+|---|---|---|---|
+| `class-summarizer` | session recording → Top 10 key takeaways → printable HTML | 3 real diarized workshop transcripts (June 2026) | any |
+| `research-helper` | folder of papers → self-contained HTML summaries | 3 real arXiv PDFs + 1 markdown | STEM (swappable) |
+| `smart-text-search` | corpus → every writer named, with the line quoted | 538 Dylan songs as JSON (1 MB) | humanities |
+| `exam-makeup-generator` | original exam → interview → assembled make-up exam | a real CS20 final, `.tex` + `.pdf` | STEM |
+| `handout-formatting` | messy Word/PDF → clean print-ready handouts + answer key | real diff-eq worksheets; a genuinely messy `.docx` | STEM |
+| `physics-interactives` | teaching brief → manipulable simulation + lesson plan | a faculty teaching brief | bio/STEM |
 
-| Demo | Move it teaches | Why it travels |
-|---|---|---|
-| `05-class-summarizer` | transcript → Top 10 Key Takeaways → printable handout | Smallest complete loop in the set (15 files). Every faculty member already has recordings. |
-| `03-class-processor` | raw course materials → teaching artifacts, one house style | The general case of the above; vision + audio + text in one pipeline. |
-| `12-research-helper` | folder of PDFs → self-contained HTML summaries | 19 files, one careful prompt. The clearest "one operation, whole corpus" demo. |
-| `13-smart-text-search` | 538 songs → every writer named, with the line | Close reading at corpus scale; the "refuse to grep" discipline is the lesson. |
-| `07-exam-makeup-generator` | original exam → interview → candidates → make-up exam | Best skill-authoring example; real CS20 trace. |
-| `02-handout-formatting` | messy Word/PDF → clean print-ready handouts + answer key | Pairs directly with `resources/handouts/`. |
-| `09-paper-to-teaching-materials` | one paper → a session's worth of material | Concrete, single-source, easy to swap in your own paper. |
+Each covers a different operation type — summarize, batch-process, search at scale,
+author a skill, reformat, build an artifact — so no two repeat the same move.
 
-### Probably too heavy for one day
-`04-course-preparation` (184 files), `11-recentering-academics` (147),
-`14-smart-text-search-joyce` (104), `01-admin-email-drafter` (122),
-`08-interview-coding`, `15-texts-and-translation`, `10-physics-interactives`.
+## Notes on provenance
 
-### Needs a deployed app or API key
-`16-oral-exam-practice-bot`, `17-simple-art-history-lecture` (MCP),
-`18`–`20` (Next.js sites), `21-text-analysis-and-datavis`, `22-image-API-widget`.
+**`class-summarizer` inputs are dated on purpose.** They are recordings of real
+sessions from 8–10 June 2026, with real participants named in them. See
+[`class-summarizer/inputs/README.md`](class-summarizer/inputs/README.md) for the
+full provenance note and the caution about recording students rather than staff.
+
+The distinction that matters: a *worked demo* should show where its material came
+from — that's the evidence it was run on something real. A *reference handout* in
+`resources/handouts/` should not announce that it was made three months ago. The
+handouts have been de-dated; these inputs deliberately have not.
+
+**`research-helper` is the easiest swap.** Its three arXiv PDFs are about LLM
+context behaviour. Drop in bioRxiv or PubMed PDFs instead and the prompt works
+unchanged — nothing in `operations/` is specific to the current papers.
+
+## Not ported
+
+- **`04-course-preparation`** — excluded.
+- **`00-handwritten-student-submissions`** — `inputs/student-work/` is gitignored;
+  only a blank synthetic quiz ships, so it's a template rather than a worked run.
+  The root of this repo already demonstrates the photo→CSV move.
+- **`21-text-analysis-and-datavis`** — its `outputs/` are prose *descriptions* of a
+  webpage rather than the page itself; the real artifact lives on Vercel.
+- The remaining heavy or deployment-dependent demos (`01`, `08`, `11`, `14`–`20`,
+  `22`) stay in the aiLAB repo.
