@@ -1,47 +1,51 @@
-# Resources
+# Workshop resources
 
-Reference material. Nothing here is tied to the exercise — it's what you keep open
-in another tab, or take home.
+This folder contains reference material for the workshop. The files can be read
+independently of the group exercise and use cases.
 
-## glossary/
+## Glossary
 
-30 terms: token, context window, harness, skill, CLAUDE.md, context rot, data
-classification, and the rest.
+The glossary defines 30 terms used in the workshop, including *token*, *context
+window*, *agent*, *skill*, *prompt injection*, and *data classification*.
 
-- [`glossary-md/`](glossary/glossary-md/) — the source, one file per term
-- [`glossary-html/index.html`](glossary/glossary-html/index.html) — browsable version
+- [`glossary/glossary-md/`](glossary/glossary-md/) contains the Markdown source,
+  with one file per term.
+- [`glossary/glossary-html/index.html`](glossary/glossary-html/index.html) opens
+  the browsable HTML version.
 
-## handouts/
+## Handouts
 
-Print-ready one-pagers. Each exists as a self-contained `.html` and a `.pdf`; some
-also ship the `.md` source.
+Most handouts are available as a standalone HTML file and a PDF. Some also have
+Markdown source.
 
-| Handout | What it covers |
+| Handout | Topic |
 |---|---|
-| [`index.html`](handouts/index.html) | Chat / Cowork / Code — the three interfaces side by side |
-| [`its-all-text.html`](handouts/its-all-text.html) | Skills, CLAUDE.md, memory, tools — all of it is text |
-| [`recipe-card.html`](handouts/recipe-card.html) | The `inputs/` → `operations/` → `outputs/` heuristic |
-| [`markdown-cheatsheet.md`](handouts/markdown-cheatsheet.md) | Markdown from zero, plus a one-screen symbol reference |
-| [`terminal-refresher.html`](handouts/terminal-refresher.html) | `cd`, `ls`, paths |
-| [`claude-code-commands-and-concepts.html`](handouts/claude-code-commands-and-concepts.html) | Slash commands, and the concepts behind them |
-| [`security-concerns.html`](handouts/security-concerns.html) | Prompt injection, excessive agency, data exposure |
-| [`what-you-can-make.html`](handouts/what-you-can-make.html) | A gallery of project genres, familiar to unfamiliar |
+| [`index.html`](handouts/index.html) | Comparison of the Chat, Cowork, and Code interfaces |
+| [`its-all-text.html`](handouts/its-all-text.html) | How prompts, project instructions, memory, skills, and tool definitions are stored as text |
+| [`recipe-card.html`](handouts/recipe-card.html) | The `inputs/` → `operations/` → `outputs/` project structure |
+| [`markdown-cheatsheet.md`](handouts/markdown-cheatsheet.md) | Basic Markdown syntax |
+| [`terminal-refresher.html`](handouts/terminal-refresher.html) | Basic terminal commands and file paths |
+| [`claude-code-commands-and-concepts.html`](handouts/claude-code-commands-and-concepts.html) | Claude Code commands and related concepts |
+| [`security-concerns.html`](handouts/security-concerns.html) | Prompt injection, excessive permissions, and data exposure |
+| [`what-you-can-make.html`](handouts/what-you-can-make.html) | Examples of projects that can be built with Claude Code |
 
-## handouts/setup-checklists/
+## Setup guides
 
-Installing Claude Code, by route.
+The [`handouts/setup-checklists/`](handouts/setup-checklists/) folder contains:
 
-- [`code-ide/`](handouts/setup-checklists/code-ide/) — terminal and VS Code. Printable
-  checklists for [Mac](handouts/setup-checklists/code-ide/checklists/claude-code-mac-checklist.html)
-  and [Windows](handouts/setup-checklists/code-ide/checklists/claude-code-windows-checklist.html),
-  plus a longer guide explaining each step.
-- [`desktop-app/`](handouts/setup-checklists/desktop-app/) — the desktop app
-- [`webui/`](handouts/setup-checklists/webui/) — claude.ai in a browser
+- `code-ide/`: terminal and VS Code setup for macOS and Windows
+- `desktop-app/`: desktop application setup
+- `webui/`: browser setup
 
-## Rebuilding a handout
+The `code-ide/checklists/` folder contains shorter printable checklists.
 
-Edit the `.html`, then regenerate the PDF:
+## Rebuilding a handout PDF
+
+Edit the handout's HTML source, then use the workshop's HTML-to-PDF script:
 
 ```bash
 ~/.claude/skills/handout-house-style/scripts/html2pdf.sh handouts/<name>.html
 ```
+
+This command depends on a local skill outside this repository. If that skill is
+not installed, the existing HTML and PDF files can still be used as provided.

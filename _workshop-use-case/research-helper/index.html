@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>research-helper — folder index</title>
+<title>Research helper file guide</title>
 <style>
   :root { --ink:#1a1a1a; --muted:#5a5a5a; --rule:#e4e4e4; --accent:#c8102e; --bg:#ffffff; }
   * { box-sizing: border-box; }
@@ -28,12 +28,12 @@
 <body>
 <main>
 
-<h1>research-helper <span class="crumb">/ folder index</span></h1>
-<p class="lede">A small project that turns source research papers into HTML summaries — each with a neutral summary plus an explicit "implications for teaching, learning &amp; research with LLM harnesses" pass. Start with <a href="summary.md">summary.md</a>; everything else is here for browsing.</p>
+<h1>Research helper <span class="crumb">/ file guide</span></h1>
+<p class="lede">This example produces an HTML summary and a separate interpretation for each source paper. Read <a href="summary.md">summary.md</a> for the workflow and limitations.</p>
 
 <h2>Top-level</h2>
 <ul>
-  <li><a href="summary.md">summary.md</a> <span class="desc">— what this project is, how we built it, what you can translate it to</span></li>
+  <li><a href="summary.md">summary.md</a> <span class="desc">— purpose, workflow, and limitations</span></li>
   <li><a href="CLAUDE.md">CLAUDE.md</a> <span class="desc">— project-level instructions loaded by Claude Code on session start</span></li>
   <li><a href="index.md">index.md</a> / <a href="index.html">index.html</a> <span class="desc">— this file</span></li>
 </ul>
@@ -53,7 +53,7 @@
 </ul>
 
 <h2>outputs/</h2>
-<p class="desc">One self-contained HTML per source paper, plus a hub index. Each file is portable (inline CSS, no external assets); the hub states the agenda up top and links every summary.</p>
+<p class="desc">One HTML summary per source paper, plus an index linking all summaries. Some summaries use local figures in <code>outputs/assets/</code>.</p>
 <ul>
   <li><a href="outputs/index.html">outputs/index.html</a> <span class="desc">— the hub</span></li>
   <li><a href="outputs/01_context-rot_hong-troynikov-huber_2025.html">01_context-rot_hong-troynikov-huber_2025.html</a></li>

@@ -1,44 +1,43 @@
-# Use cases
+# Workshop use cases
 
-Five worked examples. Each is a complete project: copy the folder, swap your own
-material into `inputs/`, and run the operations against it.
+This folder contains five examples of using Claude Code for teaching and
+research tasks. Each example includes its source files, the instructions or
+code used to process them, and sample results.
 
-```
+## How each example is organized
+
+```text
 <use-case>/
-  inputs/        what the faculty member brings
-  operations/    the prompts, skills, and scripts that do the work
-  outputs/       what comes out
-  summary.md     what it is and how it was built
-  CLAUDE.md      project instructions Claude reads automatically
+  inputs/        source material
+  operations/    prompts, skills, and scripts
+  outputs/       completed examples
+  summary.md     purpose, workflow, and limitations
+  index.md       file-by-file guide
+  CLAUDE.md      instructions loaded by Claude Code in that folder
 ```
 
-## The five
+Read `summary.md` first. Use `index.md` when you need to find a specific file.
+The outputs are examples, not guaranteed results for new source material.
 
-| Use case | The move | Inputs are |
-|---|---|---|
-| [`class-summarizer`](class-summarizer/) | session recording → top ten key takeaways → printable HTML | 3 diarized workshop transcripts |
-| [`research-helper`](research-helper/) | a folder of papers → a self-contained HTML summary of each | 3 arXiv PDFs and a markdown paper |
-| [`exam-makeup-generator`](exam-makeup-generator/) | an exam → an interview about each question → an assembled make-up exam | a CS20 final, `.tex` and `.pdf` |
-| [`handout-formatting`](handout-formatting/) | messy Word and PDF → clean print-ready handouts with an answer key | differential-equations worksheets; a `.docx` with five kinds of delimiter |
-| [`physics-interactives`](physics-interactives/) | a teaching brief → a manipulable simulation and a lesson plan around it | a faculty teaching brief |
+## Choose an example
 
-No two repeat the same move: summarize, batch-process, author a skill, reformat,
-build an artifact.
+| Use case | Input | Output | Main method |
+|---|---|---|---|
+| [`class-summarizer`](class-summarizer/) | Workshop transcripts | Ten key takeaways in Markdown and HTML | Reusable prompt followed by an HTML-formatting skill |
+| [`research-helper`](research-helper/) | Research papers | One HTML summary per paper and an index | Batch prompt with separate summary and interpretation sections |
+| [`exam-makeup-generator`](exam-makeup-generator/) | An existing exam | Candidate questions and an assembled make-up exam | Multi-step skill with instructor review |
+| [`handout-formatting`](handout-formatting/) | Word and PDF course materials | Consistent student and answer-key PDFs | LaTeX templates and a reusable conversion skill |
+| [`physics-interactives`](physics-interactives/) | A teaching brief | Standalone HTML simulations and supporting materials | Project-specific skills, templates, and review checklists |
 
-## Where to start
+For a shorter example, begin with `class-summarizer` or `research-helper`. For
+an example of a reusable skill, use `exam-makeup-generator` or
+`handout-formatting`. The `physics-interactives` example has the most supporting
+files and is best read after the simpler examples.
 
-- **Closest to what you already do:** `class-summarizer` or `research-helper`. One
-  prompt, a folder of source material, a readable result.
-- **If you want to see a skill:** `exam-makeup-generator` and `handout-formatting`
-  both package their work as a reusable skill rather than a one-off prompt.
-- **If you teach with diagrams:** `physics-interactives` ships three working
-  simulations in [`physics-interactives/outputs/sims/`](physics-interactives/outputs/sims/)
-  — enzyme kinetics, Hardy–Weinberg, and predator–prey. Each is a single HTML file
-  that opens by double-click.
+## Privacy note
 
-## A note on `class-summarizer`
-
-Its transcripts are recordings of real workshop sessions with participants named in
-them. See [`class-summarizer/inputs/README.md`](class-summarizer/inputs/README.md)
-before you point it at a recording of your own teaching — student speech in a
-classroom is not the same category as staff speech in a faculty workshop.
+The class-summarizer inputs contain transcripts from real workshop sessions and
+include participants' names. Read
+[`class-summarizer/inputs/README.md`](class-summarizer/inputs/README.md) before
+using the workflow with a class recording. Follow your institution's rules for
+recording, storing, and sharing student speech.

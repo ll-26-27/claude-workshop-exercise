@@ -1,119 +1,64 @@
 # Handout formatting
 
-A faculty member has rough course materials — a Word doc with mismatched fonts,
-a vocabulary list pasted with five different delimiters, a conjugation table
-whose columns don't line up, a worksheet whose math is baked-in Unicode glyphs.
-They want all of it re-issued as clean, consistent, print-ready handouts that
-look the same across the course, with a student version and an answer key coming
-from one file, and with accessibility built in.
+This example converts inconsistent Word and PDF course materials into a common
+LaTeX format. The same source can produce a student handout, an answer key, and
+a teacher version.
 
-This example packages that work as a reusable **skill**,
-[handout-formatting](.claude/skills/handout-formatting/SKILL.md), and proves it
-on two very different subjects: an intermediate-Spanish reading-and-vocab sheet
-and a differential-equations course.
+The example includes an intermediate Spanish worksheet and four differential
+equations handouts. The original files are in `inputs/`; generated LaTeX and
+PDF files are in `outputs/`.
 
-## The move worth noticing
+## Main components
 
-The earlier recipe this generalizes (a math-only converter built in a previous
-workshop) had a math-specific style package. The transferable idea is to
-**split the house style into two layers** so one machine serves every subject
-and audience:
+The reusable workflow is defined in
+[`.claude/skills/handout-formatting/`](.claude/skills/handout-formatting/):
 
-- **[housestyle.sty](.claude/skills/handout-formatting/styles/housestyle.sty)** —
-  the *look*: a plain black-and-white, standard problem-set aesthetic. Fonts
-  (Unicode-first, so accents and non-Latin scripts compile directly), a centered
-  title block, plain bold section headings, a thin-ruled callout box, a clean
-  vocabulary table, dialogue/gloss helpers, and the PDF accessibility metadata.
-  It knows nothing about math, vocab, or exercises.
-- **[handout.sty](.claude/skills/handout-formatting/styles/handout.sty)** — the
-  *behaviour*: the content environments (`exercise`, `solution`, `note`,
-  `passage`, `problemonly`, `\fitb`) and the **audience switch**.
-  `\usepackage[]{handout}` is the student handout; `[key]` shows answers;
-  `[teacher]` adds teacher notes. The body is written once; the audience is a
-  compile option.
+- [`SKILL.md`](.claude/skills/handout-formatting/SKILL.md) defines the steps
+  for extracting, converting, compiling, and reviewing a document.
+- [`housestyle.sty`](.claude/skills/handout-formatting/styles/housestyle.sty)
+  defines typography, headings, tables, callouts, and PDF metadata.
+- [`handout.sty`](.claude/skills/handout-formatting/styles/handout.sty)
+  defines content structures such as exercises and solutions. Package options
+  control whether answers and teacher notes are shown.
+- The `reference/` folder covers source-file extraction, content types, and
+  accessibility checks.
+- [`scripts/build.sh`](.claude/skills/handout-formatting/scripts/build.sh)
+  compiles one file or a directory tree.
 
-Because the layers are separate, a department can drop in its own visual layer
-without touching the exercise logic — and the same `handout.sty` that toggles a
-math worksheet's solutions also toggles a Spanish drill's fill-in-the-blanks.
+Separating visual styles from content behavior allows either part to be changed
+without rewriting the document body.
 
-## What it is
+## Workflow
 
-- **Skill** (the engine):
-  [.claude/skills/handout-formatting/](.claude/skills/handout-formatting/) —
-  [SKILL.md](.claude/skills/handout-formatting/SKILL.md) (workflow + triggers),
-  the two style packages in
-  [styles/](.claude/skills/handout-formatting/styles/), three reference docs in
-  [reference/](.claude/skills/handout-formatting/reference/)
-  ([ingestion](.claude/skills/handout-formatting/reference/ingestion.md),
-  [content-types](.claude/skills/handout-formatting/reference/content-types.md),
-  [accessibility](.claude/skills/handout-formatting/reference/accessibility.md)),
-  and [scripts/build.sh](.claude/skills/handout-formatting/scripts/build.sh).
-- **Inputs** (read-only source):
-  - [inputs/spanish/](inputs/spanish/) — a deliberately messy Word handout (the
-    "before": inconsistent fonts, mixed vocab delimiters, a misaligned
-    conjugation table, answers baked into the exercises).
-  - [inputs/math/](inputs/math/) — the original DE worksheet and homework PDFs,
-    carried over to confirm the generalized skill still handles math.
-- **Outputs** (rebuildable):
-  - [outputs/spanish/](outputs/spanish/) — the cleaned worksheet as one source
-    (`rutina-diaria.tex`) plus a `-key` wrapper, each compiled to PDF.
-    **These are the real artifact.**
-  - [outputs/math/](outputs/math/) — the four DE documents re-issued through the
-    generalized house style, compiled to PDF.
-  - [outputs/ACCESSIBILITY.md](outputs/ACCESSIBILITY.md) — the WCAG 2.1 AA audit
-    and the honest gap.
+1. Extract text and structure from the source file.
+2. Convert the content to the environments defined in `handout.sty`.
+3. Place the new `.tex` source in `outputs/`; do not edit the original input.
+4. Compile the student and answer-key versions.
+5. Render the PDFs and inspect every page for missing content, overflow, broken
+   tables, and incorrect answers.
+6. Record accessibility checks and remaining gaps.
 
-## How we built it
+To rebuild all included outputs, install `tectonic`, `pandoc`, and Poppler,
+then run this command from the use-case folder:
 
-- **Generalized the style.** Took the math recipe's two ideas (a provided
-  behaviour package + a companion visual layer; one source, multiple audiences
-  via options) and rewrote both packages to be subject-agnostic: Unicode-first
-  fonts, general environments (`passage`, `vocabtable`, `\dialogue`, `\gloss`,
-  `\fitb`) alongside the kept `exercise`/`solution`/`note`, and a clean
-  `key`/`teacher` audience switch.
-- **Wrote the skill around the workflow** — ingest (per source format), convert
-  (per content type), compile-and-look, accessibility pass — with the details
-  pushed into reference docs so the skill body stays short.
-- **Built a messy Spanish source** as a real `.docx` and cleaned it: the
-  five-delimiter vocab list became a tidy `vocabtable`; the misaligned
-  conjugation table became a `booktabs` table; the answers baked into the
-  exercises moved into `solution`/`\fitb` so the student and key versions come
-  from one file. The reading passage's accents compile directly (no escapes).
-- **Regression-tested on math.** Took the four differential-equations documents
-  from the earlier recipe and rebuilt them in the generalized house style. They
-  needed only a preamble swap (point them at `housestyle` + `handout` and adjust
-  the audience option) and one new general environment (`problemonly`, a
-  student-only block); the equations render correctly in the new packages. That
-  is the evidence the broadening did not break the original case.
-- **Compile-verify loop.** Every file is compiled with `tectonic` and rendered to
-  an image; nothing is "done" until it builds and looks right.
-- **Accessibility, baked in.** Monochrome by default (maximal contrast, nothing
-  on color alone), text labels on every box, real sectioning, and per-document
-  PDF language + title. The one gap
-  the `tectonic` engine cannot close (fully tagged PDF / equation alt text) is
-  documented with its `lualatex` + `tagpdf` fallback.
+```bash
+bash .claude/skills/handout-formatting/scripts/build.sh outputs
+```
 
-## What you could translate this to
+## Accessibility
 
-The shape is: **a pile of format- and look-inconsistent source documents becomes
-a uniform set of rebuildable, accessible handouts, with student/key/teacher
-versions from one source — and the house style is two swappable layers, so it
-serves any subject.** That pattern recurs widely:
+The templates use high-contrast text, explicit labels, document headings, and
+per-document language and title metadata. The current Tectonic-based process
+does not produce fully tagged PDFs or equation alternative text. That limitation
+is documented in [`outputs/ACCESSIBILITY.md`](outputs/ACCESSIBILITY.md).
 
-- **Any course standardizing its materials** — readings, labs, syllabi, exams,
-  study guides — across instructors who each arrive in their own format.
-- **Language programs** specifically: readings, vocab sets, conjugation drills,
-  dialogues, and (with a Unicode font) non-Latin scripts, all in one look.
-- **Worksheet/quiz banks** where every item needs a blank student copy and a
-  matching key without maintaining two files.
-- **Accessibility remediation programs** that treat the shared template as the
-  unit of fixing, so every document inherits compliance.
+## Limitations
 
-## The hard ones (invariants worth keeping)
+Automated extraction does not preserve all document structure. Scanned pages,
+complex tables, equations, and answer placement require manual review. A PDF
+that compiles successfully may still contain layout or content errors, so visual
+inspection is a required step.
 
-- One source, every audience via package options — never fork the body to make a
-  key.
-- Inputs stay untouched; a cleaned or converted version is always an output.
-- Look and behaviour stay in separate packages, so either can be swapped alone.
-- A document is not done until it compiles cleanly and you have looked at the
-  rendered page — extraction is a draft, not the answer.
+This structure can also support quizzes, lab sheets, study guides, or other
+document sets that need consistent formatting and separate student and answer
+versions.

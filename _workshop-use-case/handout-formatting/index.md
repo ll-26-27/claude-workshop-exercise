@@ -1,40 +1,52 @@
-# Index — Handout formatting
+# Handout formatting file guide
 
-A folder map. Start with [summary.md](summary.md) for the story;
-[CLAUDE.md](CLAUDE.md) holds the session instructions.
+Read [`summary.md`](summary.md) for the purpose, workflow, dependencies, and
+limitations of this example. [`CLAUDE.md`](CLAUDE.md) contains instructions
+that Claude Code loads when working in this folder.
 
-## Top level
+## Skill
 
-- [CLAUDE.md](CLAUDE.md) — session-start instructions for working in this folder.
-- [summary.md](summary.md) — the one document to read first.
-- [index.md](index.md) — this map.
+The reusable skill is in
+[`.claude/skills/handout-formatting/`](.claude/skills/handout-formatting/):
 
-## .claude/skills/handout-formatting/ (the skill — the engine)
+- [`SKILL.md`](.claude/skills/handout-formatting/SKILL.md): workflow
+- [`styles/housestyle.sty`](.claude/skills/handout-formatting/styles/housestyle.sty):
+  visual styles and document metadata
+- [`styles/handout.sty`](.claude/skills/handout-formatting/styles/handout.sty):
+  content structures and student/key/teacher options
+- [`reference/ingestion.md`](.claude/skills/handout-formatting/reference/ingestion.md):
+  extracting content from source formats
+- [`reference/content-types.md`](.claude/skills/handout-formatting/reference/content-types.md):
+  converting common document structures
+- [`reference/accessibility.md`](.claude/skills/handout-formatting/reference/accessibility.md):
+  accessibility checks and known limitations
+- [`scripts/build.sh`](.claude/skills/handout-formatting/scripts/build.sh):
+  compilation script
 
-- [SKILL.md](.claude/skills/handout-formatting/SKILL.md) — workflow, triggers, and the two-package house style.
-- [styles/housestyle.sty](.claude/skills/handout-formatting/styles/housestyle.sty) — the look (plain black-and-white p-set style: fonts, title block, headings, callout, vocab table, accessibility metadata).
-- [styles/handout.sty](.claude/skills/handout-formatting/styles/handout.sty) — the behaviour (environments + the student/key/teacher switch).
-- [reference/ingestion.md](.claude/skills/handout-formatting/reference/ingestion.md) — getting text out of `.docx`, PDF, and scans.
-- [reference/content-types.md](.claude/skills/handout-formatting/reference/content-types.md) — mapping prose, tables, vocab, dialogue, math, and non-Latin scripts to environments.
-- [reference/accessibility.md](.claude/skills/handout-formatting/reference/accessibility.md) — the WCAG 2.1 AA checklist and the engine's gap.
-- [scripts/build.sh](.claude/skills/handout-formatting/scripts/build.sh) — compile a `.tex` or a whole tree.
+## Inputs
 
-## inputs/ (read-only source — the "before")
+- [`inputs/spanish/spanish-rutina-diaria-DRAFT.docx`](inputs/spanish/spanish-rutina-diaria-DRAFT.docx):
+  unformatted Spanish worksheet
+- [`inputs/math/`](inputs/math/): original differential equations worksheets
+  and homework PDFs
 
-- [inputs/spanish/spanish-rutina-diaria-DRAFT.docx](inputs/spanish/spanish-rutina-diaria-DRAFT.docx) — a deliberately messy intermediate-Spanish handout.
-- [inputs/math/Worksheets/](inputs/math/Worksheets/) and [inputs/math/Homework/](inputs/math/Homework/) — the original DE source PDFs, carried over to regression-test the generalized skill.
+Treat input files as read-only.
 
-## outputs/ (rebuildable — the "after")
+## Outputs
 
-- [outputs/spanish/rutina-diaria.tex](outputs/spanish/rutina-diaria.tex) — the single source for the Spanish worksheet, plus a [rutina-diaria-key.tex](outputs/spanish/rutina-diaria-key.tex) wrapper, each compiled to `.pdf`. (The source also builds a teacher copy via `[teacher]`; the math worksheets ship that tier.)
-- [outputs/math/Worksheets/](outputs/math/Worksheets/) and [outputs/math/Homework/](outputs/math/Homework/) — the four DE documents re-issued in the generalized house style, `.tex` + `.pdf`.
-- [outputs/ACCESSIBILITY.md](outputs/ACCESSIBILITY.md) — the accessibility audit and the honest gap.
-- `housestyle.sty`, `handout.sty` beside each `.tex` — build-time copies (sources of truth live in the skill's `styles/`).
+- [`outputs/spanish/`](outputs/spanish/): Spanish student handout, answer key,
+  LaTeX source, and style-file copies
+- [`outputs/math/`](outputs/math/): four rebuilt math handouts in LaTeX and PDF
+- [`outputs/ACCESSIBILITY.md`](outputs/ACCESSIBILITY.md): accessibility review
 
-## To run end-to-end
+Build-time copies of the style files appear beside the output sources. The
+versions under `.claude/skills/handout-formatting/styles/` are the source of
+truth.
 
-Install `tectonic` (compile), `pandoc` (`.docx`), and `pdftotext`/poppler (typed
-PDF). Then follow [SKILL.md](.claude/skills/handout-formatting/SKILL.md): ingest
-a source, convert it to a house-style `.tex` in `outputs/`, and compile with
-`tectonic`. To rebuild every committed example at once, run
-`bash .claude/skills/handout-formatting/scripts/build.sh outputs`.
+## Rebuild the examples
+
+Install `tectonic`, `pandoc`, and Poppler, then run:
+
+```bash
+bash .claude/skills/handout-formatting/scripts/build.sh outputs
+```

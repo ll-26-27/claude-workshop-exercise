@@ -1,33 +1,29 @@
-# Where these transcripts come from
+# Transcript inputs
 
-**Source:** the Bok Center Learning Lab's *Claude for Faculty* workshop series,
-Harvard, **8–10 June 2026**. Three consecutive afternoon sessions, recorded in the
-room and auto-transcribed, then diarized by speaker.
+These files are transcripts from the Bok Center Learning Lab's *Claude for
+Faculty* workshop series at Harvard, held 8–10 June 2026. The sessions were
+recorded, automatically transcribed, and labeled by speaker.
 
-| File | Session | Date | Covered |
+| File | Session | Date | Approximate coverage |
 |---|---|---|---|
-| `day_1_transcript.md` | Session 1 | 8 June 2026 | ~13:24–14:53 |
-| `day_2_transcript.md` | Session 2 | 9 June 2026 | ~14:03–15:26 |
-| `day_3_transcript.md` | Session 3 | 10 June 2026 | full session |
+| `day_1_transcript.md` | Session 1 | 8 June 2026 | 13:24–14:53 |
+| `day_2_transcript.md` | Session 2 | 9 June 2026 | 14:03–15:26 |
+| `day_3_transcript.md` | Session 3 | 10 June 2026 | Full session |
 
-These are **real recordings of real sessions that already happened**, not synthetic
-samples. That is the point of the demo: this is what a recording of your own class
-looks like once it comes back from transcription — speaker labels, timestamps,
-false starts, crosstalk, and all.
+The transcripts are real, not synthetic. They contain names, timestamps, false
+starts, and overlapping speech. Participants knew that the workshop was being
+recorded.
 
-## Named people
+## Privacy and reuse
 
-The transcripts contain the names of Learning Lab staff and participating faculty,
-spoken aloud in the room (instructors, plus faculty asking questions). They were
-recorded with the room's knowledge as part of the workshop. If you repoint this
-demo at a recording of your own teaching, **check your institution's policy on
-recording students before putting a transcript in a repository** — student speech
-in a classroom is not the same category as staff speech in a faculty workshop.
+The files include the names of staff and faculty who spoke during the workshop.
+Before applying this workflow to a class recording, check your institution's
+rules for consent, student records, storage, and repository access. Do not assume
+that permission to record also grants permission to publish a transcript.
 
-## Swapping in your own
+## Using another transcript
 
-Drop any transcript in this folder and run
-[`../operations/key-takeaways-prompt.md`](../operations/key-takeaways-prompt.md)
-against it. The prompt is written to be source-agnostic: it asks for the title
-shape, an italic provenance opening, ten numbered takeaways, and a secondary-points
-section, regardless of what the session was about.
+Add the transcript to this folder, then apply
+[`../operations/key-takeaways-prompt.md`](../operations/key-takeaways-prompt.md).
+The prompt accepts any session topic but expects speaker labels and enough source
+detail to support quotations and attribution.

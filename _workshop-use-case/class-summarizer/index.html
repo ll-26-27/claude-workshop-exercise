@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>class-summarizer — folder index</title>
+<title>Class summarizer file guide</title>
 <style>
   :root { --ink:#1a1a1a; --muted:#5a5a5a; --rule:#e4e4e4; --accent:#c8102e; --bg:#ffffff; }
   * { box-sizing: border-box; }
@@ -28,12 +28,12 @@
 <body>
 <main>
 
-<h1>class-summarizer <span class="crumb">/ folder index</span></h1>
-<p class="lede">A worked example of turning a long workshop session transcript into a Top 10 Key Takeaways doc faculty can read in five minutes — markdown and HTML, ready for email and print. Start with <a href="summary.md">summary.md</a>; everything else is here for browsing.</p>
+<h1>Class summarizer <span class="crumb">/ file guide</span></h1>
+<p class="lede">This example converts a workshop transcript into ten key takeaways in Markdown and HTML. Read <a href="summary.md">summary.md</a> for the workflow and limitations.</p>
 
 <h2>Top-level</h2>
 <ul>
-  <li><a href="summary.md">summary.md</a> <span class="desc">— what this project is, how we built it, what you can translate it to</span></li>
+  <li><a href="summary.md">summary.md</a> <span class="desc">— purpose, workflow, and limitations</span></li>
   <li><a href="index.md">index.md</a> / <a href="index.html">index.html</a> <span class="desc">— this file</span></li>
 </ul>
 
@@ -42,6 +42,7 @@
 <ul>
   <li><a href="inputs/day_1_transcript.md">day_1_transcript.md</a> <span class="desc">— Day 1 of the workshop</span></li>
   <li><a href="inputs/day_2_transcript.md">day_2_transcript.md</a> <span class="desc">— Day 2 of the workshop</span></li>
+  <li><a href="inputs/day_3_transcript.md">day_3_transcript.md</a> <span class="desc">— Day 3 of the workshop; no summary has been generated</span></li>
 </ul>
 
 <h2>operations/</h2>
@@ -61,7 +62,7 @@
   <li><a href="outputs/day-2-key-takeaways.md">day-2-key-takeaways.md</a> / <a href="outputs/day-2-key-takeaways.html">.html</a></li>
 </ul>
 
-<p class="note">To run on a new session: drop the transcript at <code>inputs/day_N_transcript.md</code>, invoke the prompt at <a href="operations/key-takeaways-prompt.md">operations/key-takeaways-prompt.md</a>, then run the <code>md-to-deepthoughts-html</code> skill on the resulting markdown to produce the portable HTML companion.</p>
+<p class="note">To process another session, add its transcript to <code>inputs/</code>, apply the <a href="operations/key-takeaways-prompt.md">takeaways prompt</a>, review the result, and then run the HTML conversion skill.</p>
 
 </main>
 </body>
