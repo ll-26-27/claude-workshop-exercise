@@ -43,7 +43,19 @@ Multi-page, deployable sites with real interactivity.
 - **Outputs:** a live site (e.g. `gened-1049.vercel.app`) you share by link.
 - **Best fit:** Code.
 
-## 4. Data Visualizations (d3, three.js) — *even more complex*
+## 4. Bots & Connected Tools (MCP, Slack) — *not covered today*
+
+Claude wired to live data and other services.
+
+**Examples:** Claude connected to a library catalogue for live literature search · an art-history lecture pulling live images from a museum's own records · a Slack bot that answers from your course materials · an oral-exam practice bot · Claude connected to your Google Drive.
+
+**Worth knowing: Claude can be wired to live services**
+
+Every row above works on files you already have. This one is different: Claude reaches *out* — to a catalogue, a database, an institutional system — and works with whatever it finds there. The plumbing has a name (**MCP**), and a connection has to be deliberately set up and granted before Claude can use it.
+
+We are not setting one up today. Worth knowing the category exists — and worth knowing that connecting Claude to a live service is a real grant of access to that account, not a setting you flip casually.
+
+## 5. Data Visualizations (d3, three.js) — *even more complex*
 
 Turning a corpus or dataset into something you can see and manipulate.
 
@@ -56,7 +68,7 @@ Turning a corpus or dataset into something you can see and manipulate.
 - **Outputs:** a live page where pasted prose appears in every chart in real time.
 - **Best fit:** Code.
 
-## 5. Agentic Pipelines & Systems — *most complex*
+## 6. Agentic Pipelines & Systems — *most complex*
 
 Many tools orchestrated at scale: subagents, connected data, automation.
 

@@ -213,6 +213,9 @@ table.glance td b { color:var(--ink); font-weight:800; }
   .g-un { padding:9px 14px 10px; }
   .g-un h4 { font-size:12.5px; font-weight:800; color:var(--accent); margin:0 0 4px; }
   .g-un h4 i { font-weight:700; }
+  .g-note { font-size:11.5px; font-weight:600; line-height:1.42; margin:0 0 6px; }
+  .g-note:last-child { margin:0; }
+  .g-note b { font-weight:800; }
   .g-field { display:grid; grid-template-columns:6.2em 1fr; gap:9px; font-size:11px; font-weight:600;
     line-height:1.35; padding:2.6px 0; border-top:1px solid var(--rule); }
   .g-field:first-of-type { border-top:none; }
@@ -355,11 +358,32 @@ table.glance td b { color:var(--ink); font-weight:800; }
   <div class="main">
     <p class="kicker">Gallery · Side B</p>
     <h1 style="font-size:30px">&hellip;and further down the spine
-      <span class="sub" style="margin-top:5px">visualizations, agentic systems — and what's past the bottom edge</span>
+      <span class="sub" style="margin-top:5px">connected tools, visualizations, agentic systems — and what's past the bottom edge</span>
     </h1>
 
     <div class="gal" style="margin-top:14px">
-      <div class="gal-head"><span class="g-num">4</span><span class="g-title">Data Visualizations <span class="g-sub">d3, three.js</span></span>
+      <div class="gal-head"><span class="g-num">4</span><span class="g-title">Bots &amp; Connected Tools <span class="g-sub">MCP, Slack</span></span>
+        <span class="g-tag mut">Not covered today</span></div>
+      <div class="gal-body">
+        <div class="g-ex"><p class="g-lab">Examples</p>
+          <ul>
+            <li>Claude connected to a library catalogue for live literature search</li>
+            <li>An art-history lecture pulling live images from a museum's own records</li>
+            <li>A Slack bot that answers from your course materials</li>
+            <li>An oral-exam practice bot</li>
+            <li>Claude connected to your Google Drive</li>
+          </ul>
+        </div>
+        <div class="g-un"><p class="g-lab">Worth knowing</p>
+          <h4>Claude can be wired to live services</h4>
+          <p class="g-note">Every row above works on files you already have. This one is different: Claude reaches <i>out</i> — to a catalogue, a database, an institutional system — and works with whatever it finds there. The plumbing has a name (<b>MCP</b>), and a connection has to be deliberately set up and granted before Claude can use it.</p>
+          <p class="g-note">We are not setting one up today. Worth knowing the category exists — and worth knowing that connecting Claude to a live service is a real grant of access to that account, not a setting you flip casually.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gal">
+      <div class="gal-head"><span class="g-num">5</span><span class="g-title">Data Visualizations <span class="g-sub">d3, three.js</span></span>
         <span class="g-tag mut">Even more complex</span></div>
       <div class="gal-body">
         <div class="g-ex"><p class="g-lab">Examples</p>
@@ -383,7 +407,7 @@ table.glance td b { color:var(--ink); font-weight:800; }
     </div>
 
     <div class="gal">
-      <div class="gal-head"><span class="g-num">5</span><span class="g-title">Agentic Pipelines &amp; Systems</span>
+      <div class="gal-head"><span class="g-num">6</span><span class="g-title">Agentic Pipelines &amp; Systems</span>
         <span class="g-tag">Most complex</span></div>
       <div class="gal-body">
         <div class="g-ex"><p class="g-lab">Examples</p>
