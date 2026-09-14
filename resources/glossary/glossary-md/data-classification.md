@@ -29,7 +29,7 @@ folder, not your Downloads.
 
 ## Why it matters in this workshop
 
-This is the standing safety constraint behind everything in Day 1. Every "at your
+This is the standing safety constraint behind everything else. Every "at your
 own risk" aside in the session traces back to this one rule: the bridge plan is
 temporary, and Level 2 is the ceiling until the agreement lands.
 

@@ -1,10 +1,10 @@
 # Claude Code — Commands & Concepts
 
 A short reference for everyday work in Claude Code. The first half defines the
-**concepts** you'll keep hearing (skills, MCPs, CLAUDE.md, subagents); the second
+**concepts** you'll keep hearing (skills, CLAUDE.md, subagents); the second
 half is the **slash command** list worth keeping nearby.
 
-> Remember the through-line from Day 1: *almost all of this is just text.* Skills,
+> Remember the through-line: *almost all of this is just text.* Skills,
 > commands, CLAUDE.md, even most "tools" are text files Claude reads. Get the right
 > text in front of it and it behaves the way you want.
 
@@ -31,13 +31,6 @@ Skills load *on demand*: Claude reads the short description, and when a task mat
 it pulls in the full instructions. Think of them as saved expertise for recurring
 jobs ("draft a rubric this way," "format a handout in our house style") so you don't
 re-explain every time.
-
-### MCP (Model Context Protocol)
-A **standard way to connect Claude to outside tools and data** — your files, a
-database, a web browser, an institutional system, etc. An *MCP server* exposes a set
-of actions Claude can call. Where a skill is *knowledge*, an MCP is usually a
-*connection* to something live. You add the ones you need; Claude then has new
-abilities (e.g., "search this database," "control a browser").
 
 ### Subagents
 A **separate Claude working in the background** on a focused task, with its own fresh
@@ -80,5 +73,5 @@ Notation: `<arg>` = required · `[arg]` = optional.
 ---
 
 *Source: Claude Code command reference — code.claude.com/docs/llms.txt*
-*Summer of Claude · Faculty Workshop · Bok Center / Learning Lab*
+*Faculty Workshop · Bok Center / Learning Lab*
 </content>

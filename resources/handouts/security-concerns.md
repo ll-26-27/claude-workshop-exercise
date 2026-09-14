@@ -5,7 +5,7 @@ research. The first half names the **risks** you'll keep hearing about (prompt
 injection, excessive agency, data exposure); the second half is the **habits**
 worth keeping nearby.
 
-> Remember the through-line from Day 1: *almost all of this is just text.* That's
+> Remember the through-line: *almost all of this is just text.* That's
 > also the root of the biggest risk — Claude can't tell the instructions *you* give
 > it apart from the text it *reads*, so a hidden line inside a document can steer it.
 > Get the boundary right and it behaves.
@@ -105,4 +105,4 @@ security engineer.
 ---
 
 *Sources: OWASP Top 10 for LLM Applications — LLM01:2025 Prompt Injection; OWASP LLM Prompt Injection Prevention Cheat Sheet; OWASP Foundation, "Prompt Injection"; AI Agent Security Cheat Sheet (in this folder's `glossary/`).*
-*Summer of Claude · Faculty Workshop · Bok Center / Learning Lab*
+*Faculty Workshop · Bok Center / Learning Lab*

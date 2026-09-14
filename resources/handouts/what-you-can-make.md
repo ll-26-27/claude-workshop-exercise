@@ -43,20 +43,7 @@ Multi-page, deployable sites with real interactivity.
 - **Outputs:** a live site (e.g. `gened-1049.vercel.app`) you share by link.
 - **Best fit:** Code.
 
-## 4. Bots & Connected Tools (MCP, Slack) — *more complex; today's topic*
-
-Claude wired to live data and other services.
-
-**Examples:** Claude connected to Semantic Scholar for live literature search · an art-history lecture pulling live images from Harvard Art Museums · a Slack bot that answers from your course materials · an oral-exam practice bot · Claude connected to your Google Drive.
-
-**Unpacked: an art-history lecture, illustrated from the museum's own records**
-- **Situation:** plain lecture notes name a dozen works. The illustrated page must show the real objects — fetched, not remembered.
-- **Inputs:** the lecture notes; a free Harvard Art Museums API key in `.mcp.json`.
-- **Operations:** a custom MCP gives Claude the museum's search and object tools. It looks up each work, pulls images and tombstone metadata, builds the page.
-- **Outputs:** an illustrated lecture page where every image and caption traces to an accession record.
-- **Best fit:** Code (MCP servers run here). The worked version is this repo's `simple-art-history-lecture` example.
-
-## 5. Data Visualizations (d3, three.js) — *even more complex*
+## 4. Data Visualizations (d3, three.js) — *even more complex*
 
 Turning a corpus or dataset into something you can see and manipulate.
 
@@ -69,7 +56,7 @@ Turning a corpus or dataset into something you can see and manipulate.
 - **Outputs:** a live page where pasted prose appears in every chart in real time.
 - **Best fit:** Code.
 
-## 6. Agentic Pipelines & Systems — *most complex*
+## 5. Agentic Pipelines & Systems — *most complex*
 
 Many tools orchestrated at scale: subagents, connected data, automation.
 

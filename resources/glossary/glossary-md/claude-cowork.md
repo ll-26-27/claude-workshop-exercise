@@ -23,7 +23,7 @@ A few things to hold onto:
 
 ## Why it matters in this workshop
 
-The second half of Day 1 lives here. It's the leap from "Claude generates text" to
+This is the leap from "Claude generates text" to
 "Claude does things to my stuff" — the same mechanics as the web demos, but now
 acting on many local files at once.
 

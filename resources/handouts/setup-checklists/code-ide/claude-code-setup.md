@@ -3,40 +3,40 @@
 
 ![alt text](https://files.slack.com/files-pri/T0HTW3H0V-F0B4Z7E9QA1/screenshot_2026-05-20_at_10.03.42___am.png?pub_secret=7a1c812771)
 
-A walk-through for installing **Claude Code** on your own computer, opening the workshop repository in a code editor, and understanding how it extends what you did on Day 1 with claude.ai and Cowork.
+A walk-through for installing **Claude Code** on your own computer, opening the workshop repository in a code editor, and understanding how it relates to claude.ai and Cowork.
 
-Day 2 of the workshop is mostly this one task: a setup that takes 15–25 minutes and involves a little troubleshooting — but it's a *one-time* setup. Once Claude Code is installed, it stays installed and works from then on.
+This is one task: a setup that takes 15–25 minutes and involves a little troubleshooting — but it's a *one-time* setup. Once Claude Code is installed, it stays installed and works from then on.
 
-This guide covers the **concepts** and the **shape** of the setup. The exact, copy-pasteable commands — with a fix for every common snag — live in two companion files in the workshop repo: `resources/claude-code-mac-setup.md` and `resources/claude-code-windows-setup.md`. Keep whichever one matches your machine open alongside this guide; there's also a one-page printable checklist for each under `resources/checklists/`.
+This guide covers the **concepts** and the **shape** of the setup. The exact, copy-pasteable commands — with a fix for every common snag — live in two companion files beside this one: `claude-code-mac-setup.md` and `claude-code-windows-setup.md`. Keep whichever one matches your machine open alongside this guide; there's also a one-page printable checklist for each under `checklists/`.
 
 ---
 
 ## How Claude Code fits with claude.ai and Cowork
 
-Day 1 used two surfaces. **claude.ai** in the browser is a conversation, plus files you upload, plus artifacts that live inside the chat. **Cowork** in the desktop app is the same conversation, but pointed at a folder on your computer, so Claude can read and — with permission — change real files.
+Two surfaces come before this one. **claude.ai** in the browser is a conversation, plus files you upload, plus artifacts that live inside the chat. **Cowork** in the desktop app is the same conversation, but pointed at a folder on your computer, so Claude can read and — with permission — change real files.
 
 Claude Code is the third door onto the same Claude models. Two things make it different:
 
-- **It runs in a code editor and a terminal.** You'll work in VS Code, with the files of a project on one side and a conversation with Claude on the other. The terminal — the text-only way of moving around your computer that you may have glimpsed on Day 1 — is where Claude Code is installed and launched.
+- **It runs in a code editor and a terminal.** You'll work in VS Code, with the files of a project on one side and a conversation with Claude on the other. The terminal — the text-only way of moving around your computer — is where Claude Code is installed and launched.
 - **You can see what it's doing.** With Cowork, a lot stays out of sight: you ask, files change, but *how* it happened stays hidden behind a friendly interface. Claude Code is the opposite. Every file it reads, every command it runs, and every line of code it writes is visible in the editor in front of you.
 
-That second point is the heart of Day 2. Someone in the workshop brought up a very important question: if Claude is working through a large dataset, how do you know it did it right — isn't it just a black box? Claude Code is the answer to that. Because the work happens as visible, readable code, you can check each step, give Claude precise constraints on *how* to do the job, and even ask it to write detailed logs of what it did. You're not trusting a black box; you're reading the receipts.
+That second point is the heart of it. A question that always comes up: if Claude is working through a large dataset, how do you know it did it right — isn't it just a black box? Claude Code is the answer to that. Because the work happens as visible, readable code, you can check each step, give Claude precise constraints on *how* to do the job, and even ask it to write detailed logs of what it did. You're not trusting a black box; you're reading the receipts.
 
-The trade Day 2 asks you to make: Claude Code takes more effort to set up and gives you a terminal instead of a tidy chat box. In return you can watch and verify every step, work across far more files at once, and build operations you can run again. The setup pain is paid once.
+The trade Claude Code asks you to make: Claude Code takes more effort to set up and gives you a terminal instead of a tidy chat box. In return you can watch and verify every step, work across far more files at once, and build operations you can run again. The setup pain is paid once.
 
 ---
 
 ## The shape of the work: inputs → operations → outputs
 
-Before the repo will make sense, one simple mental model — the one Madeline drew on Day 2. It isn't an industry term of art; it's just a way to orient yourself. Any project you do with AI tends to have three kinds of thing:
+Before the repo will make sense, one simple mental model. It isn't an industry term of art; it's just a way to orient yourself. Any project you do with AI tends to have three kinds of thing:
 
 - **Inputs** — the raw material you start with. The Shakespeare texts. The CSV files. The recipe photos. The past exams.
 - **Operations** (also called tools, commands, or processes) — whatever moves you from inputs to outputs. Often this is just a prompt saved as a text file; sometimes it's a script.
 - **Outputs** — the thing you make. The close reading. The interactive website. The makeup exam.
 
-The whole workshop repo is organized this way. Open any project under `projects/` and you'll find three folders: `inputs/`, `operations-tools-commands/`, and `outputs/`.
+The whole workshop repo is organized this way. At its root you'll find three folders: `inputs/`, `operations/`, and `outputs/`.
 
-Real projects aren't always a clean left-to-right line. Everything still happens inside the **context window** you learned about on Day 1 — the system prompt, memory, your files, and the running conversation, all stacked together. So steps can chain together: the output of one operation becomes the input to the next. You might analyze some data (operation 1), then use that analysis as part of the context for writing a report (operation 2). This three-part pattern isn't a rigid assembly line — it's just a way to keep the pieces straight as they stack up.
+Real projects aren't always a clean left-to-right line. Everything still happens inside the **context window** — the system prompt, memory, your files, and the running conversation, all stacked together. So steps can chain together: the output of one operation becomes the input to the next. You might analyze some data (operation 1), then use that analysis as part of the context for writing a report (operation 2). This three-part pattern isn't a rigid assembly line — it's just a way to keep the pieces straight as they stack up.
 
 ---
 
@@ -45,20 +45,20 @@ Real projects aren't always a clean left-to-right line. Everything still happens
 - **A paid Claude account.** Pro, Max, Team, or Enterprise — the free plan does not include Claude Code. Your HUIT workshop account qualifies.
 - **15–25 minutes**, most of it spent waiting on downloads. Expect a little troubleshooting along the way. That's normal, and it's exactly why this part of the workshop is run in person with the whole team on hand.
 
-> **Data sensitivity.** Claude Code can read every file in a folder, change those files, and run commands on your computer — more reach into your machine than either of the Day 1 tools. Until Harvard's Enterprise agreement with Anthropic is in place, treat it the same way: public materials and the workshop sample files are fine, but **do not point Claude Code at — or run it inside — folders containing student work, grades, or research data above Harvard Level 2.** The grading and course-building workflows shown later in this guide are exactly what Claude Code is *for* once the data agreement lands; we'll let you know when that switches over.
+> **Data sensitivity.** Claude Code can read every file in a folder, change those files, and run commands on your computer — more reach into your machine than either of the other two tools. Until Harvard's Enterprise agreement with Anthropic is in place, treat it the same way: public materials and the workshop sample files are fine, but **do not point Claude Code at — or run it inside — folders containing student work, grades, or research data above Harvard Level 2.** The grading and course-building workflows shown later in this guide are exactly what Claude Code is *for* once the data agreement lands; we'll let you know when that switches over.
 
 ---
 
 ## 2. One-time setup: install Claude Code
 
-The full step-by-step is in [resources/claude-code-mac-setup.md (Mac)](https://github.com/bok-learning-lab/claude-code-20260519/blob/main/resources/claude-code-mac-setup.md) or [resources/claude-code-windows-setup.md (Windows)](https://github.com/bok-learning-lab/claude-code-20260519/blob/main/resources/claude-code-windows-setup.md). **Follow that guide for the exact commands.** This section explains what each step is *for*, so the commands aren't just magic you paste.
+The full step-by-step is in [`claude-code-mac-setup.md` (Mac)](claude-code-mac-setup.md) or [`claude-code-windows-setup.md` (Windows)](claude-code-windows-setup.md). **Follow that guide for the exact commands.** This section explains what each step is *for*, so the commands aren't just magic you paste.
 
 Mac users work in the **Terminal** app; Windows users work in **PowerShell**. The two paths are equivalent — the same seven steps, just with slightly different commands.
 
 1. **Get a package manager.** A package manager installs applications from the terminal — like an app store you drive with text. Macs need **Homebrew** (`brew`) installed once; Windows 11 already ships with **winget**. Confirm yours works before going further.
 2. **Install the core tools** — Git, Node, VS Code, and Python — one command each. Git is the slow one; let it finish. Git is the tool that copies the workshop repo onto your computer; VS Code is the editor you'll live in. **When all four finish, fully quit the terminal and open a fresh window** — a terminal that was already open won't notice newly installed programs, but a fresh window will.
 3. **Install Claude Code itself.** One command runs the official installer (`curl -fsSL https://claude.ai/install.sh | bash` on Mac; `irm https://claude.ai/install.ps1 | iex` on Windows). Reopen the terminal, then run `claude --version` to confirm it's there.
-4. **Clone the workshop repo.** The workshop materials live on **GitHub** — think of GitHub as the Google Docs version of a folder of files: a shared copy in the cloud rather than only on one computer. A **repository** ("repo") is just a folder structure. *Cloning* copies the repo down onto your machine. The setup guide creates a `Development` folder and clones `claude-code-20260519` into it.
+4. **Clone the workshop repo.** The workshop materials live on **GitHub** — think of GitHub as the Google Docs version of a folder of files: a shared copy in the cloud rather than only on one computer. A **repository** ("repo") is just a folder structure. *Cloning* copies the repo down onto your machine. The setup guide creates a `Development` folder and clones `claude-workshop-exercise` into it.
 5. **Open the project in VS Code** with `code .` from inside the cloned folder. If VS Code asks whether you trust the authors of the folder, choose **Yes**.
 6. **Log in to Claude.** Open the terminal that lives inside VS Code itself — use the menu **Terminal → New Terminal** — then type `claude`, press Enter, and follow the prompts. A browser window opens for you to sign in with your paid account.
 
@@ -97,9 +97,9 @@ NOTE: there are a couple of different ways you can open VS code on your computer
 
 In the browser, you paste information *in* and copy results *out* by hand. In Claude Code, that mostly disappears: **whatever file you have open, Claude can automatically see.**
 
-Click a file in the Explorer — say `outputs/answer-key.md` in the makeup-exams project — and ask Claude *"what does this file contain?"* It already has the file, because you have it selected. You'll see the filename appear at the bottom of the Claude panel, confirming what Claude can see.
+Click a file in the Explorer — say `outputs/ai_comfort_spectrum.csv` — and ask Claude *"what does this file contain?"* It already has the file, because you have it selected. You'll see the filename appear at the bottom of the Claude panel, confirming what Claude can see.
 
-When you want to hand Claude a specific file, type `@` in the Claude panel: a list of the project's files appears, and you type a few letters of the name to narrow it down, then pick the one you want. For a file outside the current project, paste in its full location instead — Day 1's tip for copying that still applies (Mac: hold Option and right-click the file in Finder → *Copy as Pathname*; Windows: hold Shift and right-click → *Copy as path*).
+When you want to hand Claude a specific file, type `@` in the Claude panel: a list of the project's files appears, and you type a few letters of the name to narrow it down, then pick the one you want. For a file outside the current project, paste in its full location instead (Mac: hold Option and right-click the file in Finder → *Copy as Pathname*; Windows: hold Shift and right-click → *Copy as path*).
 
 Try it now: click any file in the Explorer and ask Claude what it is.
 
@@ -109,38 +109,40 @@ NOTE: When you create or add a new file inside VS Code, it automatically generat
 
 ---
 
-## 5. The workshop repo and its projects
+## 5. The workshop repo
 
-The repo you copied down has three main folders.
+The repo you copied down is one project, laid out in the three-part shape above.
 
-**`projects/`** holds the Day 1 projects, each in the inputs → operations → outputs layout:
+- **`inputs/`** — the raw material. Here, the photos each table took of its
+  hand-drawn comfort spectrum.
+- **`operations/`** — what moves inputs to outputs. Two prompt files
+  (`01-photos-to-csv.md`, `02-csv-to-visualization.md`) and one script
+  (`extract.py`). The numbers at the front of the names simply keep a multi-step
+  operation in order.
+- **`outputs/`** — what comes out: a CSV of the coded responses and an
+  interactive HTML chart built from it.
 
-- `01_close-reading` — Shakespeare texts as inputs; a close-reading prompt as the operation; a close reading as the output.
-- `02_population-pyramids` — UN population CSVs in; an analyze-the-data prompt and a build-the-site prompt; an interactive HTML site out.
-- `03_recipes` — recipe photos in; prompts to rename and transcribe them; a small recipe website out.
-- `04_class-schedule-conflict` and `05_makeup-exams` — a course schedule reshuffled around a visiting lecturer; candidate makeup-exam questions drafted from a bank of past exams.
-- `06_research_helper` — recent papers in; a summary site out.
-- `07_summary_of_day_1` — the one built from the workshop itself. Its input is the transcript of the Day 1 recording; its outputs are the setup guides, the top-tips list, and the glossary from Day 1. A telling detail: the "top 13 tips" file was created 45 minutes before Day 2 began, by giving the *same* transcript a *new* prompt — same input, new operation, new output.
+Two more folders hold reference material rather than project work:
 
-**`resources/`** holds reference material, including the two setup guides and the printable checklists.
-
-**`my-project/`** is an empty project — the three folders, ready and waiting — for your own work.
+- **`resources/`** — the glossary, the printable handouts, and these setup guides.
+- **`use-cases/`** — worked examples you can copy as starting points for your own
+  projects. Each follows the same `inputs/` → `operations/` → `outputs/` layout.
 
 ### Project instructions: the CLAUDE.md file
 
-Some projects have a `CLAUDE.md` file in their main folder (look inside `projects/05_makeup-exams/`). This is Claude Code's version of Cowork's custom instructions: a plain-text file describing what the project is, how you'd like Claude to work in it, and any rules to follow. Claude reads it automatically whenever you work in that folder. When you find yourself giving Claude the same guidance over and over — how you like files named, what tone to write in, an "always ask before deleting" rule — write it into a `CLAUDE.md` so you don't have to keep repeating it.
+A project can carry a `CLAUDE.md` file in its main folder. This is Claude Code's version of Cowork's custom instructions: a plain-text file describing what the project is, how you'd like Claude to work in it, and any rules to follow. Claude reads it automatically whenever you work in that folder. When you find yourself giving Claude the same guidance over and over — how you like files named, what tone to write in, an "always ask before deleting" rule — write it into a `CLAUDE.md` so you don't have to keep repeating it.
 
 ---
 
 ## 6. Worked example: start your own project
 
-The goal of Day 2 isn't to finish a project. It's to leave with the tool installed and a clear idea of what you'd point it at. `my-project/` is there for exactly that.
+The goal isn't to finish a project. It's to leave with the tool installed and a clear idea of what you'd point it at. `my-project/` is there for exactly that.
 
 1. **Rename it.** Right-click `my-project` in the Explorer and choose **Rename** (or select it and press Enter). Give it a name that means something to you — a course, a research task, a recurring chore.
 2. **Put something in `inputs/`.** Drag a file in from Finder/Explorer, or create a new file and paste text into it. Anything textual works — a syllabus, a draft email, lecture notes, an exported document. In the workshop, one faculty member started a course-redesign project simply by pasting in the text of a relevant email.
-3. **Write the operation.** Create a text file in `operations-tools-commands/` that describes, in plain sentences, what you want done. The prompt files in the example projects (look in `projects/01_close-reading/operations-tools-commands/`) are good models to copy; the numbers at the front of their names (`01-`, `02-`) simply keep multi-step operations in order.
+3. **Write the operation.** Create a text file in `operations/` that describes, in plain sentences, what you want done. The prompt files in this repo's `operations/` folder are good models to copy; the numbers at the front of their names (`01-`, `02-`) simply keep multi-step operations in order.
 4. **Ask Claude to run it.** In the Claude panel, point it at your input and your operation, and have it write the result to `outputs/`.
-5. **Iterate.** Just like Day 1's artifacts — if the first result is 70% right, tell Claude what to change rather than starting over.
+5. **Iterate.** As with artifacts in the browser — if the first result is 70% right, tell Claude what to change rather than starting over.
 
 Optionally, add a short `CLAUDE.md` in the project's main folder once you know how you want Claude to behave in it.
 
@@ -170,7 +172,7 @@ These are also the clearest illustration of the point from the top of this guide
 - **A "command not recognized" error is the most common setup snag.** When it happens right after you installed something, the terminal you have open just hasn't noticed the new program. Quit the terminal fully and open a fresh window.
 - **Check what changed.** When Claude edits files, the changes show up in the editor — glance at them before moving on. Being able to see the work is the whole advantage of Claude Code; use it.
 - **One project per folder.** Point each project at the smallest folder that holds what it needs, the way the workshop projects are set up.
-- **Start a new conversation when you switch tasks.** Leftover conversation from the last task (what Day 1 called "context rot") quietly misleads Claude. Typing `/context` shows what's currently filling the context window; `/compact` shrinks a long conversation into a summary so you can keep going.
+- **Start a new conversation when you switch tasks.** Leftover conversation from the last task ("context rot") quietly misleads Claude. Typing `/context` shows what's currently filling the context window; `/compact` shrinks a long conversation into a summary so you can keep going.
 - **Back up before big changes.** Before any task that renames or deletes a lot of files, make a copy of the folder first.
 - **The setup is one-time.** Errors during install are expected, and the team has seen them all; the troubleshooting sections of the two setup guides cover the common ones.
 - **Type `/exit`** to close Claude Code when you're done in the terminal.
