@@ -20,14 +20,14 @@ Markdown source.
 
 | Handout | Topic |
 |---|---|
-| [`index.html`](handouts/index.html) | Comparison of the Chat, Cowork, and Code interfaces |
-| [`its-all-text.html`](handouts/its-all-text.html) | How prompts, project instructions, memory, skills, and tool definitions are stored as text |
-| [`recipe-card.html`](handouts/recipe-card.html) | The `inputs/` → `operations/` → `outputs/` project structure |
-| [`markdown-cheatsheet.md`](handouts/markdown-cheatsheet.md) | Basic Markdown syntax |
-| [`terminal-refresher.html`](handouts/terminal-refresher.html) | Basic terminal commands and file paths |
-| [`claude-code-commands-and-concepts.html`](handouts/claude-code-commands-and-concepts.html) | Claude Code commands and related concepts |
-| [`security-concerns.html`](handouts/security-concerns.html) | Prompt injection, excessive permissions, and data exposure |
-| [`what-you-can-make.html`](handouts/what-you-can-make.html) | Examples of projects that can be built with Claude Code |
+| [`claude-three-interfaces/`](handouts/claude-three-interfaces/) | Comparison of the Chat, Cowork, and Code interfaces |
+| [`its-all-text/`](handouts/its-all-text/) | How prompts, project instructions, memory, skills, and tool definitions are stored as text |
+| [`recipe-card/`](handouts/recipe-card/) | The `inputs/` → `operations/` → `outputs/` project structure |
+| [`markdown-cheatsheet/`](handouts/markdown-cheatsheet/) | Basic Markdown syntax |
+| [`terminal-refresher/`](handouts/terminal-refresher/) | Basic terminal commands and file paths |
+| [`claude-code-commands-and-concepts/`](handouts/claude-code-commands-and-concepts/) | Claude Code commands and related concepts |
+| [`security-concerns/`](handouts/security-concerns/) | Prompt injection, excessive permissions, and data exposure |
+| [`what-you-can-make/`](handouts/what-you-can-make/) | Examples of projects that can be built with Claude Code |
 
 ## Setup guides
 
@@ -44,7 +44,7 @@ The `code-ide/checklists/` folder contains shorter printable checklists.
 Edit the handout's HTML source, then use the workshop's HTML-to-PDF script:
 
 ```bash
-~/.claude/skills/handout-house-style/scripts/html2pdf.sh handouts/<name>.html
+~/.claude/skills/handout-house-style/scripts/html2pdf.sh handouts/<name>/<name>.html
 ```
 
 This command depends on a local skill outside this repository. If that skill is

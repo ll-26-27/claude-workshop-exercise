@@ -40,7 +40,7 @@ Three things that surprise beginners — and are the whole point:
    `#` and `*` don't throw you.
 
 This is why nearly everything Claude reads and writes — including every doc in
-this glossary and your [CLAUDE.md](claude-md.md) file — is Markdown.
+this glossary and your [CLAUDE.md](../../glossary/glossary-md/claude-md.md) file — is Markdown.
 
 ## The cheatsheet
 
@@ -130,14 +130,14 @@ to be perfect — it just needs the pipes.
 
 ## Why it matters in this workshop
 
-Almost everything you create and read in [Claude Code](claude-code.md) is
+Almost everything you create and read in [Claude Code](../../glossary/glossary-md/claude-code.md) is
 Markdown. You won't write much of it by hand — but recognizing the symbols means
 "oh, that's just formatting," not confusion.
 
 ## See also
 
-- [Markdown](markdown.md) — the short glossary definition
-- [CLAUDE.md](claude-md.md) · [SKILL.md](skill-md.md) — Markdown files you'll meet
-- [Artifact](artifact.md) — other things Claude can produce
+- [Markdown](../../glossary/glossary-md/markdown.md) — the short glossary definition
+- [CLAUDE.md](../../glossary/glossary-md/claude-md.md) · [SKILL.md](../../glossary/glossary-md/skill-md.md) — Markdown files you'll meet
+- [Artifact](../../glossary/glossary-md/artifact.md) — other things Claude can produce
 </content>
 </invoke>

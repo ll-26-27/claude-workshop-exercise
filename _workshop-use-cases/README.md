@@ -1,16 +1,42 @@
-# Workshop exercise: photos to a chart
+# Workshop use case: photos to a chart
 
-In this exercise, each table places task cards on a 1–10 scale showing how
+In this use case, each table places task cards on a 1–10 scale showing how
 comfortable the group is with using AI for each task. The repository contains
 12 photos of those arrangements.
 
-The exercise produces two files:
+The use case produces two files:
 
 - `outputs/ai_comfort_spectrum.csv`: one row for each card that can be read and
   placed on the scale
 - `outputs/ai_comfort_spectrum.html`: an interactive chart built from the CSV
 
 Completed examples of both files are included.
+
+## Activity that produced the photos
+
+This activity was used with teaching fellows during training.
+
+Each participant receives a paper card with one task on it:
+
+- pink cards describe tasks completed by a teacher;
+- orange cards describe tasks completed by a student.
+
+Working in pairs or small groups, participants place the cards along a
+horizontal line according to how comfortable they are with AI doing each task.
+Tasks they do not want AI involved in go at the far left. Tasks they would be
+comfortable assigning to AI go toward the far right. Cards can share the same
+position and can be moved during the discussion.
+
+After arranging the cards, the group discusses:
+
+- What patterns appear across the teacher and student tasks?
+- Where did group members disagree?
+- For tasks at the uncomfortable end, is the concern that AI cannot perform the
+  task well, or that completing the task is itself an important part of
+  learning or teaching?
+
+Each table then photographs its completed arrangement. Those photographs are
+the inputs for the data-processing steps below.
 
 ## Folder contents
 
@@ -24,7 +50,7 @@ Run commands from this folder because the prompts and scripts use paths that
 are relative to it:
 
 ```bash
-cd _workshop-exercise
+cd _workshop-use-cases
 ```
 
 ## Option 1: use the prompt

@@ -1,8 +1,8 @@
-# Workshop use cases
+# Further use cases
 
-This folder contains five examples of using Claude Code for teaching and
-research tasks. Each example includes its source files, the instructions or
-code used to process them, and sample results.
+This folder contains five examples to explore after the main workshop use case.
+Each example includes its source files, the instructions or code used to process
+them, and sample results.
 
 ## How each example is organized
 

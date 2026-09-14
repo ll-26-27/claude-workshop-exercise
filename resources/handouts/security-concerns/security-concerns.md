@@ -80,7 +80,7 @@ can — the same trust you'd extend a browser extension.
 
 ### Misinformation
 Injection and ordinary
-[hallucination](../glossary/glossary-md/hallucination.md) both make wrong output
+[hallucination](../../glossary/glossary-md/hallucination.md) both make wrong output
 look *more* authoritative, not less — a security problem when that output reaches a
 student or goes into print.
 

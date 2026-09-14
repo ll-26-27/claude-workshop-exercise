@@ -1,18 +1,18 @@
 # Claude workshop materials
 
 This repository contains materials for a one-day workshop on using Claude Code
-with files and folders. It includes a group exercise, five worked examples, and
-reference handouts from the Bok Center Learning Lab.
+with files and folders. It includes one workshop use case, five further use
+cases, and reference handouts from the Bok Center Learning Lab.
 
-You do not need to understand every file. Start with the group exercise during
-the workshop, then choose a use case that is close to your own work.
+You do not need to understand every file. Start with the main use case during
+the workshop, then choose a further use case that is close to your own work.
 
 ## Repository guide
 
 | Folder | Contents | Start here |
 |---|---|---|
-| [`_workshop-exercise/`](_workshop-exercise/) | The shared workshop activity. It converts photos of table responses into a CSV file and an interactive chart. | [`README.md`](_workshop-exercise/README.md) |
-| [`_workshop-use-case/`](_workshop-use-case/) | Five examples involving transcripts, research papers, exams, handouts, and interactive simulations. | [`README.md`](_workshop-use-case/README.md) |
+| [`_workshop-use-cases/`](_workshop-use-cases/) | The shared workshop activity. It converts photos of table responses into a CSV file and an interactive chart. | [`README.md`](_workshop-use-cases/README.md) |
+| [`further-use-cases/`](further-use-cases/) | Five additional examples involving transcripts, research papers, exams, handouts, and interactive simulations. | [`README.md`](further-use-cases/README.md) |
 | [`resources/`](resources/) | A glossary, setup guides, and workshop handouts. | [`README.md`](resources/README.md) |
 
 ## Common folder structure
@@ -38,7 +38,7 @@ web interface.
 
 ## Suggested path through the workshop
 
-1. Review the [`inputs` / `operations` / `outputs` handout](resources/handouts/recipe-card.html).
-2. Complete the [group exercise](_workshop-exercise/README.md).
-3. Browse the [use-case comparison](_workshop-use-case/README.md).
+1. Review the [`inputs` / `operations` / `outputs` handout](resources/handouts/recipe-card/recipe-card.html).
+2. Complete the [workshop use case](_workshop-use-cases/README.md).
+3. Browse the [further use cases](further-use-cases/README.md).
 4. Open one use case and read its `summary.md` before inspecting its files.
