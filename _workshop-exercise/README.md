@@ -11,7 +11,7 @@ _workshop-exercise/
 ```
 
 This is the `inputs/` → `operations/` → `outputs/` shape in its simplest form, and
-it is the same shape every project in [`../further-use-cases/`](../further-use-cases/) follows. The
+it is the same shape every project in [`../_workshop-use-case/`](../_workshop-use-case/) follows. The
 [recipe-card handout](../resources/handouts/recipe-card.html) is about this layout.
 
 ## Running it
@@ -34,5 +34,6 @@ script covers deterministically.
 
 ## Why the leading underscore
 
-It sorts to the top, above `resources/` and `further-use-cases/`, so the first thing
-anyone sees when they open the repo is the thing they are here to do.
+Both `_workshop-` folders sort above `resources/`, and `_workshop-exercise` comes
+first (e before u). So opening the repo puts the thing the room actually does at the
+top of the list, with the use cases directly beneath it.

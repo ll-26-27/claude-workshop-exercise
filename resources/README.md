@@ -52,7 +52,7 @@ it's written.
   connected-services warning, so the safety point survives without teaching MCP.
 - **`setup-checklists/code-ide/claude-code-setup.md`** — rewritten out of its
   "Day 2 of the workshop" narrative; the repo tour now describes *this* repo
-  (`_workshop-exercise/`, `resources/`, `further-use-cases/`) rather than the
+  (`_workshop-exercise/`, `resources/`, `_workshop-use-case/`) rather than the
   June repo's `projects/` layout. Clone URLs in the Mac/Windows guides and
   checklists repointed to `claude-workshop-exercise`.
 - **Glossary** — two entries (`data-classification`, `claude-cowork`) had "Day 1"
