@@ -127,7 +127,7 @@ The repo you copied down holds the workshop exercise plus the material that supp
 Two more folders hold reference material rather than project work:
 
 - **`resources/`** — the glossary, the printable handouts, and these setup guides.
-- **`use-cases/`** — worked examples you can copy as starting points for your own
+- **`further-use-cases/`** — worked examples you can copy as starting points for your own
   projects. Each follows the same `inputs/` → `operations/` → `outputs/` layout.
 
 ### Project instructions: the CLAUDE.md file
