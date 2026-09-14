@@ -15,18 +15,6 @@ samples. That is the point of the demo: this is what a recording of your own cla
 looks like once it comes back from transcription — speaker labels, timestamps,
 false starts, crosstalk, and all.
 
-## Why the dates are on purpose
-
-The transcripts are dated because the sessions were. That's fine, and it's worth
-saying out loud when you run the demo: *"this is a recording of a workshop we ran
-in June; yours will look the same."* Faculty read a dated transcript as evidence
-the pipeline was run on something real.
-
-What should **not** carry a date is the material in `resources/handouts/` — those
-are reference sheets participants take home, and a handout that visibly announces
-it was made three months ago reads as stale. Those have been de-dated. Inputs and
-outputs of a worked demo are the opposite case: provenance is the feature.
-
 ## Named people
 
 The transcripts contain the names of Learning Lab staff and participating faculty,

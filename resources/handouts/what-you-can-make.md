@@ -72,14 +72,14 @@ Turning a corpus or dataset into something you can see and manipulate.
 
 Many tools orchestrated at scale: subagents, connected data, automation.
 
-**Examples:** close-reading a whole corpus with parallel subagents · a reproducible coding pipeline for interview transcripts · an automated weekly research digest (scheduled) · a recommendation engine grounded in institutional data.
+**Examples:** a make-up exam generator that interviews you between drafts · a reproducible coding pipeline for interview transcripts · close-reading a whole corpus with parallel subagents · an automated weekly research digest (scheduled).
 
-**Unpacked: naming every writer cited across 538 Dylan songs**
-- **Situation:** you want a close reading at corpus scale — every author named in any lyric, with the line quoted — not a keyword grep.
-- **Inputs:** the full corpus of songs (or transcripts, or a long text).
-- **Operations:** spawn parallel close-reading subagents, each told to read like a scholar and refuse to grep; aggregate their findings.
-- **Outputs:** one aggregated JSON plus a prose writeup pairing each name with its quoted line.
-- **Best fit:** Code (subagents, scale).
+**Unpacked: a make-up exam that is genuinely equivalent, not a reshuffle**
+- **Situation:** a student misses the final. You need a replacement that tests the same things at the same difficulty, and you do not have a week.
+- **Inputs:** the original exam, as LaTeX and PDF.
+- **Operations:** a skill runs a multi-round flow — read the exam, interview you on what each question is really testing, draft two or three candidates per slot, revise on your feedback, then assemble the chosen ones in the original's format.
+- **Outputs:** a candidate bank you chose from, plus the finished make-up exam as LaTeX.
+- **Best fit:** Code (multi-round, stateful).
 
 ## ?. Unknown ??? — *beyond the map*
 
