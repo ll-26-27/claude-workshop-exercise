@@ -14,7 +14,7 @@ Write it to **`outputs/ai_comfort_spectrum.html`**, as a file — do not publish
 a hosted page. Embed the CSV rows as JSON in the page so it opens by double-clicking:
 no server, no `fetch`, no sidecar data file. Webfonts are the one permitted network
 request; everything else must be inline. Design so the page still reads correctly in the
-fallback stack, because offline that is what a reader gets.
+fallback stack, because offline that is what a reader gets. 
 
 The page is titled **AI Comfort Spectrum** — use that exact string, in that case, as both
 the `<title>` and the `<h1>`.
@@ -109,7 +109,7 @@ background from a token — a transparent body borrows the host's ground.
    placed, teacher median, student median, and the **widest split** — defined as
    `max − min` of `comfort_level` within a task — with the task that owns it.
 3. **Controls, in one row above the chart** — switch rows between task and table; filter
-   to teacher or student cards; hide low-confidence readings; and a theme control with
+   to teacher or student cards; hide low-confidence readings; a filter to select which dates of the data to show (and this would only apply to a CSV which had dates as one of the columns)-- either a specific date or a range of dates; and a theme control with
    **three** segments — Auto / Light / Dark, defaulting to Auto — where Auto removes
    `data-theme` from `:root` and the other two stamp it. Two segments would make the
    `prefers-color-scheme` block unreachable after the first click. Segmented buttons with
@@ -131,7 +131,7 @@ background from a token — a transparent body borrows the host's ground.
 
 ## Interaction
 
-- Hover any dot for a tooltip naming the table, the task, the integer, the unrounded
+- Hover any dot for a tooltip naming the table, the task, the integer, the mean, the unrounded
   position and the confidence. Position it with a pointer offset and flip it near the
   viewport edges so it never runs off screen.
 - **Colour follows the card type, never the row's rank** — a filter that changes the
