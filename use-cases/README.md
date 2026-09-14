@@ -1,6 +1,6 @@
 # Use cases
 
-Portable worked examples. Every one follows the same schema as this repo's root:
+Portable worked examples. Every one follows the same schema as `_workshop-exercise/`:
 
 ```
 <use-case>/
@@ -51,7 +51,7 @@ unchanged — nothing in `operations/` is specific to the current papers.
 - **`04-course-preparation`** — excluded.
 - **`00-handwritten-student-submissions`** — `inputs/student-work/` is gitignored;
   only a blank synthetic quiz ships, so it's a template rather than a worked run.
-  The root of this repo already demonstrates the photo→CSV move.
+  `_workshop-exercise/` already demonstrates the photo→CSV move.
 - **`21-text-analysis-and-datavis`** — its `outputs/` are prose *descriptions* of a
   webpage rather than the page itself; the real artifact lives on Vercel.
 - The remaining heavy or deployment-dependent demos (`01`, `08`, `11`, `14`–`20`,
