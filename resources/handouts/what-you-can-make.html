@@ -412,19 +412,19 @@ table.glance td b { color:var(--ink); font-weight:800; }
       <div class="gal-body">
         <div class="g-ex"><p class="g-lab">Examples</p>
           <ul>
-            <li>Close-reading a whole corpus with parallel subagents</li>
+            <li>A make-up exam generator that interviews you between drafts</li>
             <li>A reproducible coding pipeline for interview transcripts</li>
+            <li>Close-reading a whole corpus with parallel subagents</li>
             <li>An automated weekly research digest (scheduled)</li>
-            <li>A recommendation engine grounded in institutional data</li>
           </ul>
         </div>
         <div class="g-un"><p class="g-lab">Unpacked</p>
-          <h4>Naming every writer cited across 538 Dylan songs</h4>
-          <div class="g-field"><span class="fl">Situation</span><span>A close reading at corpus scale — every author named in any lyric, with the line quoted — not a keyword grep.</span></div>
-          <div class="g-field"><span class="fl">Inputs</span><span>The full corpus of songs (or transcripts, or a long text).</span></div>
-          <div class="g-field"><span class="fl">Operations</span><span>Spawn parallel close-reading subagents, each told to read like a scholar and refuse to grep; aggregate.</span></div>
-          <div class="g-field"><span class="fl">Outputs</span><span>One aggregated JSON plus a prose writeup pairing each name with its quoted line.</span></div>
-          <div class="g-field"><span class="fl">Best fit</span><span><span class="pl hot">Code</span><span class="pl mut">subagents, scale</span></span></div>
+          <h4>A make-up exam that is genuinely equivalent, not a reshuffle</h4>
+          <div class="g-field"><span class="fl">Situation</span><span>A student misses the final. You need a replacement that tests the same things at the same difficulty, and you do not have a week.</span></div>
+          <div class="g-field"><span class="fl">Inputs</span><span>The original exam, as LaTeX and PDF.</span></div>
+          <div class="g-field"><span class="fl">Operations</span><span>A skill runs a multi-round flow: read the exam, interview you on what each question is really testing, draft two or three candidates per slot, revise on your feedback, then assemble the chosen ones in the original's format.</span></div>
+          <div class="g-field"><span class="fl">Outputs</span><span>A candidate bank you chose from, plus the finished make-up exam as LaTeX.</span></div>
+          <div class="g-field"><span class="fl">Best fit</span><span><span class="pl hot">Code</span><span class="pl mut">multi-round, stateful</span></span></div>
         </div>
       </div>
     </div>

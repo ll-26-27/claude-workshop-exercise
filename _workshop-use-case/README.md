@@ -1,62 +1,44 @@
 # Use cases
 
-Portable worked examples. Every one follows the same schema as `_workshop-exercise/`:
+Five worked examples. Each is a complete project: copy the folder, swap your own
+material into `inputs/`, and run the operations against it.
 
 ```
 <use-case>/
   inputs/        what the faculty member brings
   operations/    the prompts, skills, and scripts that do the work
   outputs/       what comes out
-  summary.md     situation → move → why it matters
-  CLAUDE.md      project instructions
+  summary.md     what it is and how it was built
+  CLAUDE.md      project instructions Claude reads automatically
 ```
-
-Ported from `~/Development/20260903-aiLAB/demos/`, with the `NN-` number prefixes
-dropped — the ordering there was a gallery sequence, not a teaching order.
 
 ## The five
 
-| Use case | The move | Inputs are | Fit |
-|---|---|---|---|
-| `class-summarizer` | session recording → Top 10 key takeaways → printable HTML | 3 real diarized workshop transcripts (June 2026) | any |
-| `research-helper` | folder of papers → self-contained HTML summaries | 3 real arXiv PDFs + 1 markdown | STEM (swappable) |
-| `exam-makeup-generator` | original exam → interview → assembled make-up exam | a real CS20 final, `.tex` + `.pdf` | STEM |
-| `handout-formatting` | messy Word/PDF → clean print-ready handouts + answer key | real diff-eq worksheets; a genuinely messy `.docx` | STEM |
-| `physics-interactives` | teaching brief → manipulable simulation + lesson plan | a faculty teaching brief | bio/STEM |
+| Use case | The move | Inputs are |
+|---|---|---|
+| [`class-summarizer`](class-summarizer/) | session recording → top ten key takeaways → printable HTML | 3 diarized workshop transcripts |
+| [`research-helper`](research-helper/) | a folder of papers → a self-contained HTML summary of each | 3 arXiv PDFs and a markdown paper |
+| [`exam-makeup-generator`](exam-makeup-generator/) | an exam → an interview about each question → an assembled make-up exam | a CS20 final, `.tex` and `.pdf` |
+| [`handout-formatting`](handout-formatting/) | messy Word and PDF → clean print-ready handouts with an answer key | differential-equations worksheets; a `.docx` with five kinds of delimiter |
+| [`physics-interactives`](physics-interactives/) | a teaching brief → a manipulable simulation and a lesson plan around it | a faculty teaching brief |
 
-**`physics-interactives` now ships three working simulations** in `outputs/sims/`: enzyme kinetics (Michaelis–Menten + inhibition), Hardy–Weinberg, and Lotka–Volterra predator–prey. Each is one self-contained HTML file that opens by double-click, with sliders, linked views, guided prompts, and a visible model-limitations panel. Before this the project shipped skills and templates but no actual sim. See [`physics-interactives/outputs/sims/README.md`](physics-interactives/outputs/sims/README.md) for how the models were checked — including a textbook claim the build caught and corrected.
+No two repeat the same move: summarize, batch-process, author a skill, reformat,
+build an artifact.
 
-Each covers a different operation type — summarize, batch-process, author a skill,
-reformat, build an artifact — so no two repeat the same move.
+## Where to start
 
-## Notes on provenance
+- **Closest to what you already do:** `class-summarizer` or `research-helper`. One
+  prompt, a folder of source material, a readable result.
+- **If you want to see a skill:** `exam-makeup-generator` and `handout-formatting`
+  both package their work as a reusable skill rather than a one-off prompt.
+- **If you teach with diagrams:** `physics-interactives` ships three working
+  simulations in [`physics-interactives/outputs/sims/`](physics-interactives/outputs/sims/)
+  — enzyme kinetics, Hardy–Weinberg, and predator–prey. Each is a single HTML file
+  that opens by double-click.
 
-**`class-summarizer` inputs are dated on purpose.** They are recordings of real
-sessions from 8–10 June 2026, with real participants named in them. See
-[`class-summarizer/inputs/README.md`](class-summarizer/inputs/README.md) for the
-full provenance note and the caution about recording students rather than staff.
+## A note on `class-summarizer`
 
-The distinction that matters: a *worked demo* should show where its material came
-from — that's the evidence it was run on something real. A *reference handout* in
-`resources/handouts/` should not announce that it was made three months ago. The
-handouts have been de-dated; these inputs deliberately have not.
-
-**`research-helper` is the easiest swap.** Its three arXiv PDFs are about LLM
-context behaviour. Drop in bioRxiv or PubMed PDFs instead and the prompt works
-unchanged — nothing in `operations/` is specific to the current papers.
-
-## Not ported
-
-- **`13-smart-text-search`** — ported, then removed. The Dylan-lyrics corpus is a
-  genuinely strong demo of close reading at scale, but it is a humanities example
-  and the room it would have run in is mostly bio/STEM. Still available at
-  `~/Development/20260903-aiLAB/demos/13-smart-text-search`, and in this repo's
-  git history.
-- **`04-course-preparation`** — excluded.
-- **`00-handwritten-student-submissions`** — `inputs/student-work/` is gitignored;
-  only a blank synthetic quiz ships, so it's a template rather than a worked run.
-  `_workshop-exercise/` already demonstrates the photo→CSV move.
-- **`21-text-analysis-and-datavis`** — its `outputs/` are prose *descriptions* of a
-  webpage rather than the page itself; the real artifact lives on Vercel.
-- The remaining heavy or deployment-dependent demos (`01`, `08`, `11`, `14`–`20`,
-  `22`) stay in the aiLAB repo.
+Its transcripts are recordings of real workshop sessions with participants named in
+them. See [`class-summarizer/inputs/README.md`](class-summarizer/inputs/README.md)
+before you point it at a recording of your own teaching — student speech in a
+classroom is not the same category as staff speech in a faculty workshop.

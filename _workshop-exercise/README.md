@@ -31,9 +31,3 @@ Or skip the script entirely and hand Claude
 [`operations/01-photos-to-csv.md`](operations/01-photos-to-csv.md) — the prompt does
 the same job, and the "optional fast path" note in it explains which steps the
 script covers deterministically.
-
-## Why the leading underscore
-
-Both `_workshop-` folders sort above `resources/`, and `_workshop-exercise` comes
-first (e before u). So opening the repo puts the thing the room actually does at the
-top of the list, with the use cases directly beneath it.
