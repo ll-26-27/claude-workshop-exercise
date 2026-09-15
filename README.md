@@ -38,7 +38,7 @@ web interface.
 
 ## Suggested path through the workshop
 
-1. Review the [`inputs` / `operations` / `outputs` handout](resources/handouts/recipe-card/recipe-card.html).
+1. Review the [`inputs` / `operations` / `outputs` handout](resources/handouts/project-plan/project-plan.html).
 2. Complete the [workshop use case](_workshop-use-cases/README.md).
 3. Browse the [further use cases](further-use-cases/README.md).
 4. Open one use case and read its `summary.md` before inspecting its files.

@@ -22,7 +22,7 @@ Markdown source.
 |---|---|
 | [`claude-three-interfaces/`](handouts/claude-three-interfaces/) | Comparison of the Chat, Cowork, and Code interfaces |
 | [`its-all-text/`](handouts/its-all-text/) | How prompts, project instructions, memory, skills, and tool definitions are stored as text |
-| [`recipe-card/`](handouts/recipe-card/) | The `inputs/` → `operations/` → `outputs/` project structure |
+| [`project-plan/`](handouts/project-plan/) | The `inputs/` → `operations/` → `outputs/` project structure |
 | [`markdown-cheatsheet/`](handouts/markdown-cheatsheet/) | Basic Markdown syntax |
 | [`terminal-refresher/`](handouts/terminal-refresher/) | Basic terminal commands and file paths |
 | [`claude-code-commands-and-concepts/`](handouts/claude-code-commands-and-concepts/) | Claude Code commands and related concepts |
