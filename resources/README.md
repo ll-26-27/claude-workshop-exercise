@@ -20,7 +20,7 @@ Markdown source.
 
 | Handout | Topic |
 |---|---|
-| [`claude-three-interfaces/`](handouts/claude-three-interfaces/) | Comparison of the Chat, Cowork, and Code interfaces |
+| [`ai-surfaces/`](handouts/ai-surfaces/) | Comparison of Chat, Work, and CLI surfaces |
 | [`its-all-text/`](handouts/its-all-text/) | How prompts, project instructions, memory, skills, and tool definitions are stored as text |
 | [`project-plan/`](handouts/project-plan/) | The `inputs/` → `operations/` → `outputs/` project structure |
 | [`markdown-cheatsheet/`](handouts/markdown-cheatsheet/) | Basic Markdown syntax |

@@ -8,8 +8,7 @@ this example.
 - [`inputs/README.md`](inputs/README.md): source and privacy information
 - [`inputs/day_1_transcript.md`](inputs/day_1_transcript.md): Day 1 transcript
 - [`inputs/day_2_transcript.md`](inputs/day_2_transcript.md): Day 2 transcript
-- [`inputs/day_3_transcript.md`](inputs/day_3_transcript.md): Day 3 transcript;
-  no summary has been generated
+- [`inputs/day_3_transcript.md`](inputs/day_3_transcript.md): Day 3 transcript
 
 ## Operations
 
@@ -24,6 +23,7 @@ this example.
   [HTML](outputs/day-1-key-takeaways.html)
 - [Day 2 Markdown](outputs/day-2-key-takeaways.md) and
   [HTML](outputs/day-2-key-takeaways.html)
+- [Day 3 Markdown](outputs/day-3-key-takeaways.md)
 
 To process another session, add its transcript to `inputs/`, apply the
 takeaways prompt, review the result, and then run the HTML conversion skill.

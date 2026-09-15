@@ -4,14 +4,14 @@ This example converts a workshop transcript into a short document with ten key
 takeaways. It produces a Markdown file for editing and a standalone HTML file
 for reading, printing, or sharing.
 
-Two completed examples are included:
+Three reviewed examples are included:
 
 - [Day 1 Markdown](outputs/day-1-key-takeaways.md) and
   [HTML](outputs/day-1-key-takeaways.html)
 - [Day 2 Markdown](outputs/day-2-key-takeaways.md) and
   [HTML](outputs/day-2-key-takeaways.html)
+- [Day 3 Markdown](outputs/day-3-key-takeaways.md)
 
-The Day 3 transcript is included, but no Day 3 summary has been generated.
 
 ## How it works
 
