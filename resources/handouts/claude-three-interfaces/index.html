@@ -1,584 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Claude: Three Interfaces</title>
-  <style>
-
-    /* ── Print setup ───────────────────────────────────────────── */
-    @page {
-      size: 11in 17in;
-      margin: 0.6in 0.65in;
-    }
-
-    /* Flip note pinned to the bottom margin of page 1 only */
-    @page :first {
-      @bottom-center {
-        content: "Reasonable responses to what Claude knows about your work. (over)";
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-        font-size: 9pt;
-        font-style: italic;
-        color: #4B5563;
-      }
-    }
-
-    /* ── Reset ─────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --chat:   #1D4ED8;
-      --cowork: #B45309;
-      --code:   #166534;
-      --border: #D1D5DB;
-      --text:   #111827;
-      --muted:  #4B5563;
-      --faint:  #9CA3AF;
-      --font:   -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      --mono:   "SF Mono", "Fira Code", Menlo, monospace;
-    }
-
-    html { font-size: 11.5pt; }
-
-    body {
-      font-family: var(--font);
-      color: var(--text);
-      line-height: 1.45;
-      background: white;
-      /* Screen preview approximates 11×17 portrait proportions */
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 2.5rem 2.5rem 4rem;
-    }
-
-    /* ── Page title ────────────────────────────────────────────── */
-    .page-title {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .page-title h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .page-title p {
-      font-size: 0.85rem;
-      color: var(--faint);
-      margin-top: 0.25rem;
-    }
-
-    /* ── Top panels ────────────────────────────────────────────── */
-    .panels {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 0;
-    }
-
-    .panel {
-      border: 1.5px solid var(--border);
-      border-top: 4px solid transparent;
-      border-radius: 8px;
-      padding: 1rem 1.1rem 1rem;
-    }
-    .panel.chat   { border-top-color: var(--chat);   }
-    .panel.cowork { border-top-color: var(--cowork); }
-    .panel.code   { border-top-color: var(--code);   }
-
-    /* Fixed-height block so the interface name lands at the same
-       level across all three panels regardless of text wrapping */
-    .panel .env-block {
-      min-height: 8rem;
-    }
-
-    .panel .env-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--faint);
-      margin-bottom: 0.2rem;
-    }
-    .panel .env-name {
-      font-size: 1.7rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
-    .panel .env-detail {
-      font-size: 0.75rem;
-      color: var(--faint);
-    }
-
-    .panel .connector {
-      text-align: center;
-      color: var(--border);
-      font-size: 1.1rem;
-      padding: 0.25rem 0;
-      line-height: 1;
-    }
-
-    .panel .iface-name {
-      font-size: 1.7rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-    .panel.chat  .iface-name { color: var(--chat); }
-    .panel.cowork .iface-name { font-size: 1.3rem; }   /* longer label needs more room */
-    .panel.code  .iface-name { color: var(--code); }
-
-    /* Mode-name spans inside the cowork panel's iface-name */
-    .m-chat   { color: var(--chat); }
-    .m-cowork { color: var(--cowork); }
-    .m-code   { color: var(--code); }
-    .m-sep    { color: var(--faint); font-weight: 400; }
-
-    .panel .product {
-      display: block;
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--faint);
-      margin-top: 0.1rem;
-    }
-
-    .panel .tagline {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 0.5rem;
-      line-height: 1.5;
-    }
-
-    /* ── Bridge connector ──────────────────────────────────────── */
-    /*
-      Each .bridge-point draws its own horizontal bar segment with
-      ::before — no parent-relative calc() needed.
-        left:   bar runs from the column midpoint rightward
-        center: full bar (plus cowork color)
-        right:  bar runs from left to the column midpoint
-      Together the three segments form one continuous line.
-    */
-    .bridge {
-      display: flex;
-      margin: 0.5rem 0 0.6rem;
-    }
-
-    .bridge-point {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      padding-top: 0.6rem;
-    }
-
-    /* Horizontal bar segments */
-    .bridge-point::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1.5px;
-      background: var(--border);
-    }
-    .bridge-point.left::before  { left: 50%; }
-    .bridge-point.right::before { right: 50%; }
-
-    /* Vertical tick dropping from the bar */
-    .bridge-tick {
-      width: 1.5px;
-      height: 0.6rem;
-      background: var(--border);
-    }
-    .bridge-point.center .bridge-tick {
-      background: var(--cowork);
-      height: 0.8rem;
-    }
-
-    .bridge-note {
-      font-size: 0.68rem;
-      text-align: center;
-      line-height: 1.4;
-      color: var(--faint);
-      margin-top: 0.15rem;
-    }
-    .bridge-point.left  .bridge-note { color: var(--chat); }
-    .bridge-point.right .bridge-note { color: var(--code); }
-    .bridge-point.center .bridge-note {
-      color: var(--cowork);
-      font-weight: 600;
-      font-size: 0.72rem;
-    }
-
-    /* ── Section header (shared centered label + rules) ─────────── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin: 0.9rem 0 0.5rem;
-    }
-    .section-header::before,
-    .section-header::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .section-label {
-      font-size: 0.62rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.11em;
-      color: var(--faint);
-      white-space: nowrap;
-    }
-
-    /* ── Mode column headers ───────────────────────────────────── */
-    .mode-headers {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    .mode-header {
-      padding: 0.35rem 0.75rem;
-      border: 1.5px solid var(--border);
-      border-left: 3px solid transparent;
-      border-radius: 8px;
-    }
-    .mode-header.chat   { border-left-color: var(--chat);   }
-    .mode-header.cowork { border-left-color: var(--cowork); }
-    .mode-header.code   { border-left-color: var(--code);   }
-
-    .mode-header-name {
-      font-size: 1.7rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-    .mode-header.chat   .mode-header-name { color: var(--chat);   }
-    .mode-header.cowork .mode-header-name { color: var(--cowork); }
-    .mode-header.code   .mode-header-name { color: var(--code);   }
-
-    .mode-header-note {
-      font-size: 0.68rem;
-      color: var(--faint);
-      font-style: italic;
-      line-height: 1.4;
-    }
-
-    /* ── Content rows ──────────────────────────────────────────── */
-    .row-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .cell {
-      padding: 0.45rem 0.75rem;
-      border: 1.5px solid var(--border);
-      border-left: 3px solid transparent;
-      border-radius: 8px;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-    .cell.chat   { border-left-color: var(--chat);   }
-    .cell.cowork { border-left-color: var(--cowork); }
-    .cell.code   { border-left-color: var(--code);   }
-
-    .cell ul {
-      padding-left: 1.1rem;
-      list-style: disc;
-    }
-    .cell ul li { margin-bottom: 0.2rem; }
-
-    .cell p { line-height: 1.55; }
-
-    .cell.italic p { font-style: italic; }
-
-    /* ── "When to switch" — coda treatment ────────────────────── */
-    .section-header.switch {
-      margin-top: 1.2rem;
-    }
-    .section-header.switch .section-label {
-      font-weight: 400;
-      font-style: italic;
-      letter-spacing: 0.07em;
-    }
-    .cell.aside {
-      border-style: dashed;
-      border-left-style: solid;
-      background: #F9FAFB;
-    }
-
-    /* ── Page break + flip note ────────────────────────────────── */
-
-    /* On screen: show the flip note in flow as a preview */
-    .flip-note {
-      margin-top: 1.2rem;
-      padding: 0.55rem 1rem;
-      border: 1.5px dashed var(--border);
-      border-radius: 8px;
-      text-align: center;
-      font-size: 0.78rem;
-      font-style: italic;
-      color: var(--muted);
-    }
-
-    /* On print: hide in-flow div — the @page margin box takes over */
-    @media print {
-      .flip-note { display: none; }
-    }
-
-    /* Security section starts on page 2 */
-    .section-header.security {
-      break-before: page;
-      page-break-before: always; /* legacy fallback */
-    }
-
-    /* ── Security section ──────────────────────────────────────── */
-
-    /* Section header variant — warm amber rules + highlighted label */
-    .section-header.security::before,
-    .section-header.security::after {
-      background: #D97706;
-      height: 1.5px;
-    }
-    .section-header.security .section-label {
-      background: #FEF9C3;
-      color: #78350F;
-      border: 1px solid #FCD34D;
-      padding: 0.15rem 0.55rem;
-      border-radius: 3px;
-    }
-
-    /* Two-tier subheadings within each security cell */
-    .sec-head {
-      font-size: 0.62rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin: 0.55rem 0 0.2rem;
-    }
-    .sec-head:first-child { margin-top: 0; }
-    .sec-head.ok   { color: #166534; }
-    .sec-head.warn { color: #92400E; }
-
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three AI Work Surfaces</title>
+<style>
+@page{size:11in 17in;margin:.5in}
+:root{--ink:#141414;--accent:#c8102e;--rule:#c9c9c9;--muted:#5f5f5f;--soft:#f5f5f5}
+*{box-sizing:border-box}
+html,body{margin:0;background:#eee;color:var(--ink);font-family:Inter,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:10in;height:16in;margin:24px auto;padding:.48in .56in .65in;background:#fff;position:relative;box-shadow:0 4px 24px #0002}
+@media print{body{background:#fff}.sheet{margin:0;box-shadow:none}}
+.kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+h1{font-size:39px;line-height:1;margin:0;letter-spacing:-.035em;font-weight:900}h1 small{display:block;color:var(--muted);font-size:15px;letter-spacing:0;font-weight:600;margin-top:9px}
+.lede{font-size:14px;line-height:1.45;margin:16px 0 18px;max-width:8.2in}.lede b{color:var(--accent)}
+.providers{border:2px solid var(--ink);padding:12px 14px;margin:0 0 20px}.providers h2,.surface h2{font-size:11px;letter-spacing:.13em;text-transform:uppercase;margin:0 0 8px;font-weight:900}.provider-list{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.provider-list div{font-size:11.5px;line-height:1.35}.provider-list strong{font-weight:900}.providers .note{font-size:11px;color:var(--muted);margin:9px 0 0}
+.surface{border:3px solid var(--ink);padding:14px 16px 16px;position:relative;background:#fff}.surface h2{color:var(--accent);margin-bottom:4px}.surface-intro{font-size:13px;line-height:1.4;margin:0}.surface-name{margin:14px auto 0;border:2px solid var(--accent);padding:13px 16px;text-align:center;max-width:5.8in;background:#fff}.surface-name strong{display:block;font-size:23px;line-height:1.1}.surface-name span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.branch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 -2px}.branch{position:relative;padding-top:35px}.branch::before{content:"";position:absolute;top:0;left:50%;width:4px;height:28px;background:var(--accent);transform:translateX(-50%)}.branch::after{content:"▼";position:absolute;top:21px;left:50%;transform:translateX(-50%);font-size:15px;line-height:1;color:var(--accent)}.branch-card{border:2px solid var(--ink);border-top:6px solid var(--accent);padding:12px 12px 13px;min-height:3.25in}.branch-card h3{font-size:24px;line-height:1;margin:0 0 3px;font-weight:900}.branch-card .surface-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:800}.branch-card .product{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:var(--muted);display:block;margin:8px 0}.branch-card p{font-size:12.5px;line-height:1.42;margin:0}.branch-card ul{padding-left:16px;margin:10px 0 0}.branch-card li{font-size:12px;line-height:1.35;margin:0 0 5px}.branch-card li::marker{color:var(--accent)}
+.section{margin-top:19px}.section h2{font-size:11px;text-transform:uppercase;letter-spacing:.13em;margin:0 0 7px;padding-bottom:6px;border-bottom:2px solid var(--ink);font-weight:900}.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.box{border-left:4px solid var(--accent);background:var(--soft);padding:10px 12px;min-height:1.12in}.box p,.box li{font-size:12px;line-height:1.4}.box p{margin:0}.box ul{margin:0;padding-left:16px}.box li{margin:0 0 4px}.box strong{font-weight:900}
+.footer{position:absolute;left:.56in;right:.56in;bottom:.27in;border-top:1px solid var(--rule);padding-top:6px;display:flex;justify-content:space-between;color:var(--muted);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.page-break{break-before:page;page-break-before:always}.security-grid .box{min-height:2.05in}.security-grid .box h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px;font-weight:900;color:var(--accent)}.security-grid .box ul{padding-left:17px}.closing{border:2px solid var(--ink);padding:14px 16px;margin-top:20px}.closing h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}.closing p{font-size:13px;line-height:1.45;margin:0}.source-note{font-size:10px;color:var(--muted);line-height:1.4;margin-top:18px}
+</style>
 </head>
 <body>
+<main class="sheet">
+  <p class="kicker">Faculty workshop · interfaces and models</p>
+  <h1>Three AI work surfaces<small>Chat · Work · Code — the labels vary by product</small></h1>
+  <p class="lede">The <b>surface</b> is the environment where you work with an AI model. The model may be similar across surfaces; what changes is the context it can use, the actions it can take, and how much setup or oversight the task requires.</p>
 
-  <!-- Title -->
-  <header class="page-title">
-    <h1>Claude: Three Interfaces</h1>
-    <p>Choosing the right environment for your work</p>
-  </header>
+  <section class="providers">
+    <h2>Examples across providers</h2>
+    <div class="provider-list"><div><strong>OpenAI</strong><br>GPT models<br>ChatGPT · Work · Codex</div><div><strong>Anthropic</strong><br>Claude models<br>Claude · Cowork · Claude Code</div><div><strong>Google</strong><br>Gemini models<br>Gemini · Workspace tools</div><div><strong>Microsoft</strong><br>Copilot<br>Product features vary</div></div>
+    <p class="note">These names and features change. Check your plan and institution's settings. The three surfaces below describe a useful pattern, not a promise that every provider offers every surface.</p>
+  </section>
 
-  <!-- Top panels -->
-  <div class="panels">
+  <section class="surface">
+    <h2>One app or workspace can expose several surfaces</h2>
+    <p class="surface-intro">Start with the same AI account or desktop application. Choose the surface that matches the work.</p>
+    <div class="surface-name"><strong>The app / workspace</strong><span>your account, projects, files, model choices, and permissions</span></div>
+    <div class="branch-grid">
+      <div class="branch"><div class="branch-card"><span class="surface-label">Surface 1</span><h3>Chat</h3><span class="product">Web UI · mobile app</span><p>A conversational space for questions, drafting, explanation, and feedback.</p><ul><li>Type or attach what the model needs</li><li>Good for one-off or exploratory work</li><li>Usually the least setup</li></ul></div></div>
+      <div class="branch"><div class="branch-card"><span class="surface-label">Surface 2</span><h3>Work</h3><span class="product">Projects · desktop workspace · agent tasks</span><p>A project space for longer tasks and finished deliverables.</p><ul><li>Keep files and instructions together</li><li>Return to the same project over time</li><li>Review plans, sources, and changes</li></ul></div></div>
+      <div class="branch"><div class="branch-card"><span class="surface-label">Surface 3</span><h3>Code</h3><span class="product">Terminal · IDE · coding agent</span><p>A developer-facing space for local files, repositories, and repeatable workflows.</p><ul><li>Read, write, and run code or commands</li><li>Process many files consistently</li><li>Requires the most technical oversight</li></ul></div></div>
+    </div>
+  </section>
 
-    <div class="panel chat">
-      <div class="env-block">
-        <div class="env-label">Environment</div>
-        <div class="env-name">Web UI</div>
-        <div class="env-detail">Chrome, Safari, or any browser — nothing to install</div>
-      </div>
-      <div class="connector">↕</div>
-      <div class="iface-name">Chat</div>
-      <span class="product">claude.ai</span>
-      <p class="tagline">Ask questions, get answers. Open a browser tab and start.</p>
-    </div>
+  <section class="section"><h2>What changes as you move across surfaces?</h2><div class="three-col">
+    <div class="box"><p><strong>Chat:</strong> You provide the context in the conversation. Results usually stay in the chat until you copy them out.</p></div>
+    <div class="box"><p><strong>Work:</strong> A project can hold files, instructions, and task history. The AI can create deliverables for you to review.</p></div>
+    <div class="box"><p><strong>Code:</strong> The AI can operate on a repository or folder through tools. Changes can be repeated, tested, and reviewed as a diff.</p></div>
+  </div></section>
 
-    <div class="panel cowork">
-      <div class="env-block">
-        <div class="env-label">Environment</div>
-        <div class="env-name">Desktop app</div>
-        <div class="env-detail">Installed on your computer — works alongside your files</div>
-      </div>
-      <div class="connector">↕</div>
-      <div class="iface-name">
-        <span class="m-chat">Chat</span><span class="m-sep"> / </span><span class="m-cowork">Cowork</span><span class="m-sep"> / </span><span class="m-code">Code</span>
-      </div>
-      <span class="product">Claude Code (desktop app)</span>
-      <p class="tagline">A desktop app that contains all three modes: chat, file-connected cowork, and code-level access. More capable than the browser — and more to be thoughtful about.</p>
-    </div>
+  <section class="section"><h2>When to choose each one</h2><div class="three-col">
+    <div class="box"><ul><li>Brainstorming or drafting</li><li>Explaining a concept</li><li>Small, self-contained input</li></ul></div>
+    <div class="box"><ul><li>Several related files</li><li>Multi-step research or writing</li><li>A deliverable to revise over time</li></ul></div>
+    <div class="box"><ul><li>Many files or repeated runs</li><li>Software and data workflows</li><li>Tests, version control, or automation</li></ul></div>
+  </div></section>
 
-    <div class="panel code">
-      <div class="env-block">
-        <div class="env-label">Environment</div>
-        <div class="env-name">Terminal + IDE/CLI</div>
-        <div class="env-detail">The terminal (command-line interface) and a code editor like VS Code</div>
-      </div>
-      <div class="connector">↕</div>
-      <div class="iface-name">Code</div>
-      <span class="product">Claude Code (CLI)</span>
-      <p class="tagline">Build workflows that run on your files automatically, at scale.</p>
-    </div>
+  <div class="footer"><span>Faculty workshop</span><span>Three work surfaces</span></div>
+</main>
 
-  </div>
+<main class="sheet page-break">
+  <p class="kicker">Review before you trust the output</p>
+  <h1>Surface, model, and permissions<small>The interface is only one part of the system</small></h1>
+  <p class="lede">A product name does not tell you exactly what the AI can see or do. Check the model, connected data, tools, and approval settings for the particular account and task.</p>
 
-  <!-- Bridge connector -->
-  <div class="bridge">
-    <div class="bridge-point left">
-      <div class="bridge-tick"></div>
-      <div class="bridge-note">Chat mode<br>available here too</div>
-    </div>
-    <div class="bridge-point center">
-      <div class="bridge-tick"></div>
-      <div class="bridge-note">Desktop app runs all three modes</div>
-    </div>
-    <div class="bridge-point right">
-      <div class="bridge-tick"></div>
-      <div class="bridge-note">Code-level access<br>available here too</div>
-    </div>
-  </div>
+  <section class="section"><h2>What to check</h2><div class="three-col security-grid">
+    <div class="box"><h3>Model</h3><ul><li>Which model is selected?</li><li>What are its limits for length, images, code, and reasoning?</li><li>Is the result important enough to verify against a source?</li></ul></div>
+    <div class="box"><h3>Context</h3><ul><li>Which messages, files, project notes, or connected apps are included?</li><li>Could sensitive information be in that context?</li><li>Can the model distinguish instructions from untrusted source text?</li></ul></div>
+    <div class="box"><h3>Actions</h3><ul><li>Can it only suggest, or can it edit files and run commands?</li><li>Does it ask before taking a consequential action?</li><li>Can you inspect and undo the changes?</li></ul></div>
+  </div></section>
 
-  <!-- Mode column headers -->
-  <div class="row-grid mode-headers">
-    <div class="mode-header chat">
-      <div class="mode-header-name">Chat</div>
-      <div class="mode-header-note">(also available in desktop app)</div>
-    </div>
-    <div class="mode-header cowork">
-      <div class="mode-header-name">Cowork</div>
-      <div class="mode-header-note">(only available in desktop app)</div>
-    </div>
-    <div class="mode-header code">
-      <div class="mode-header-name">Code</div>
-      <div class="mode-header-note">(also available in desktop app)</div>
-    </div>
-  </div>
+  <section class="section"><h2>Provider examples at a glance</h2><div class="three-col">
+    <div class="box"><p><strong>OpenAI:</strong> ChatGPT provides Chat and Work in the current desktop experience; Codex is the coding surface. Availability depends on account and plan.</p></div>
+    <div class="box"><p><strong>Anthropic:</strong> Claude provides browser chat; Cowork and Claude Code add project, desktop, or terminal-based work. Availability depends on account and plan.</p></div>
+    <div class="box"><p><strong>Other providers:</strong> Gemini, Copilot, and other systems use different product names and combinations. Map their features to Chat, Work, and Code by checking what context and actions they support.</p></div>
+  </div></section>
 
-  <!-- Row: What you can do -->
-  <div class="section-header">
-    <span class="section-label">What you can do</span>
-  </div>
-  <div class="row-grid">
-    <div class="cell chat">
-      <ul>
-        <li>Brainstorm, draft, and think through problems</li>
-        <li>Get feedback on text you paste in</li>
-        <li>Summarize, translate, or explain anything</li>
-        <li>Quick Q&amp;A on any topic</li>
-      </ul>
-    </div>
-    <div class="cell cowork">
-      <ul>
-        <li>Have Claude read and work with your actual files</li>
-        <li>Work iteratively on a project across multiple sessions</li>
-        <li>Build reusable workflows (skills) for tasks you do repeatedly</li>
-        <li>Run code-level commands — with more oversight than the full CLI</li>
-      </ul>
-    </div>
-    <div class="cell code">
-      <ul>
-        <li>Build workflows that run automatically and repeatedly</li>
-        <li>Process hundreds of files at once</li>
-        <li>Connect to Google Drive, GitHub, Airtable, and more</li>
-        <li>Build tools your colleagues can use without any setup</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Row: What it requires -->
-  <div class="section-header">
-    <span class="section-label">What it requires</span>
-  </div>
-  <div class="row-grid">
-    <div class="cell chat">
-      <p>A browser and a Claude account (free or Pro). Nothing to install, nothing to configure. Open a tab and start.</p>
-    </div>
-    <div class="cell cowork">
-      <p>Claude Code installed as a desktop application. A project folder connected on your computer. Roughly an afternoon to configure well.</p>
-    </div>
-    <div class="cell code">
-      <p>Comfort with the terminal and a code editor like VS Code. Longer-term investment for payoff.</p>
-    </div>
-  </div>
-
-  <!-- Row: What Claude knows -->
-  <div class="section-header">
-    <span class="section-label">What Claude knows about your work</span>
-  </div>
-  <div class="row-grid">
-    <div class="cell chat">
-      <p>Only what you type or paste. Every new conversation starts fresh — no memory between sessions, no access to your files.</p>
-    </div>
-    <div class="cell cowork">
-      <p>The files in the folder you connect. Your preferences and project context, if you set up a CLAUDE.md file. Persistent across sessions with the right configuration.</p>
-    </div>
-    <div class="cell code">
-      <p>Your files, your preferences, your workflow history — and whatever external services you connect. The most persistent and configurable memory of any interface.</p>
-    </div>
-  </div>
-
-  <!-- Row: When to switch (coda) -->
-  <div class="section-header switch">
-    <span class="section-label">When to switch interfaces</span>
-  </div>
-  <div class="row-grid">
-    <div class="cell chat italic aside">
-      <p>Move to <strong>Cowork</strong> when you keep pasting the same file every session. Move to <strong>Code</strong> when you want automation or scale.</p>
-      <p>Step back to Chat from either: when the task is a quick one-off — a brainstorm, a draft, a lookup — that doesn't need your files. The browser tab is always the fastest path for a fast question.</p>
-    </div>
-    <div class="cell cowork italic aside">
-      <p>Move to <strong>Code</strong> when you want a workflow to run without you, or need to operate on many files at once.</p>
-      <p>Step back to <strong>Cowork</strong> from Code when a task calls for back-and-forth with your files rather than a running script. Step back to <strong>Chat</strong> when the task is simple enough that it doesn't need your connected project — don't invoke the desktop app for a quick question.</p>
-    </div>
-    <div class="cell code italic aside">
-      <p>No higher interface — but that doesn't mean every task belongs here. Step back to <strong>Cowork</strong> when you want interactive conversation with your files. Step back to <strong>Chat</strong> when you just need a quick answer. Even experienced Code users keep a browser tab open for simple questions. Not every task warrants a pipeline.</p>
-    </div>
-  </div>
-
-  <!-- Flip note (bottom of page 1) -->
-  <div class="flip-note">
-    Reasonable responses to what Claude knows about your work. (over)
-  </div>
-
-  <!-- Row: Security implications (page 2) -->
-  <div class="section-header security">
-    <span class="section-label">Security implications</span>
-  </div>
-  <div class="row-grid">
-    <div class="cell chat">
-      <div class="sec-head ok">No need to worry about</div>
-      <ul>
-        <li>Claude accessing files on your computer</li>
-        <li>Claude running code or commands</li>
-        <li>Anything persisting after you close the tab</li>
-      </ul>
-      <div class="sec-head warn">Be thoughtful about</div>
-      <ul>
-        <li>Anything you paste or type leaves your computer — treat sensitive content (student records, unpublished work, personal data) as you would an email to a third party</li>
-      </ul>
-    </div>
-    <div class="cell cowork">
-      <div class="sec-head ok">No need to worry about</div>
-      <ul>
-        <li>Claude accessing files outside the folder you connect</li>
-        <li>Claude acting without your awareness — the desktop app shows you what it's doing</li>
-      </ul>
-      <div class="sec-head warn">Be thoughtful about</div>
-      <ul>
-        <li>Be intentional about which folder you connect — Claude can read and edit everything inside it, including sensitive files</li>
-        <li>Code-level commands run on your actual computer — understand what you're approving</li>
-      </ul>
-    </div>
-    <div class="cell code">
-      <div class="sec-head ok">No need to worry about</div>
-      <ul>
-        <li>Claude acting without a confirmation step — Claude Code asks before running significant commands by default</li>
-      </ul>
-      <div class="sec-head warn">Be thoughtful about</div>
-      <ul>
-        <li>Claude can read, write, and delete files and run terminal commands — review its plan before approving actions on important data</li>
-        <li>Connections to outside services (Drive, GitHub, etc.) grant real access to those accounts — understand what each one reaches before enabling it</li>
-        <li>Automated workflows that run unattended need to be designed carefully before you trust them at scale</li>
-      </ul>
-    </div>
-  </div>
-
+  <section class="closing"><h2>Practical rule</h2><p>Use <strong>Chat</strong> when you need a conversation. Use <strong>Work</strong> when you need a project and a deliverable. Use <strong>Code</strong> when you need a repeatable operation on files or software. In every surface, read the plan, inspect the source, and check the result.</p></section>
+  <p class="source-note">Product names and availability change. This handout describes a comparison framework for the workshop; consult the provider's current documentation and your institution's policies before using connected data or granting permissions.</p>
+  <div class="footer"><span>Faculty workshop</span><span>Check the surface before you work</span></div>
+</main>
 </body>
 </html>
